@@ -8,9 +8,7 @@ class Sistema {
 	Empresa empresa
 	Home home
 	
-	def registrarUsuario(String username, String apellido, String nombre,DateTime fnac) throws UsuarioYaExisteException{
-		val _usuarioNuevo = null
-		_usuarioNuevo
+	def registrarUsuario(Usuario usuarioNuevo) throws UsuarioYaExisteException{
 		this.home.registrarUsuario(usuarioNuevo)
 		
 	}
