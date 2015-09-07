@@ -2,13 +2,9 @@ package servicios
 
 import java.sql.Connection
 import java.sql.DriverManager
-import java.util.List
-import java.sql.Date
 import org.joda.time.DateTime
 
 class Home {
-	Sistema sistema
-	List<Usuario> users
 
 	def crear(Usuario usuarioNuevo) throws UsuarioYaExisteException{
 		var java.util.Date d= usuarioNuevo.fnac.toDate

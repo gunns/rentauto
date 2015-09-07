@@ -1,16 +1,16 @@
 package servicios
 
 import ar.edu.unq.epers.model.Empresa
-import org.joda.time.DateTime
-
 class Sistema {
 	
 	Empresa empresa
 	Home home
+	EnviadorDeMails envmail
 	
 	def registrarUsuario(Usuario usuarioNuevo) throws UsuarioYaExisteException{
 		usuarioNuevo.valcode= (usuarioNuevo.username+"validado")
 		this.home.crear(usuarioNuevo)
+		this.envmail.enviar(usuarioNuevo.email,usuarioNuevo.valcode)
 		
 	}
 	
@@ -40,7 +40,8 @@ class Sistema {
 			throw new UsuarioNoExisteException
 		}else{
 			var userVal=user.validarPassword(password)
-			
+			userVal.password=nuevaPassword
+			this.home.guardar(userVal)
 		}
 	}
 }
