@@ -10,19 +10,20 @@ class Usuario {
 	String username
 	String email
 	DateTime fnac
-
-	def getNombre() {
-		return nombre
+	String valcode
+	String password
+	
+	def validate(){
+		valcode = "VALIDADO"
 	}
 	
-	def getUsername() {
-		return username
-	}
-	def getEmail(){
-		return email
-	}
-	def getFnac(){
-		fnac
+	def validarPassword(String password) throws PasswordIncorrectaException{
+		if(this.password==password){
+			return this
+		}
+		else{
+			throw new PasswordIncorrectaException
+		}
 	}
 	
 }
