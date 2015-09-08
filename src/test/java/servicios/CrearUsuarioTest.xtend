@@ -16,7 +16,6 @@ class CrearUsuarioTest {
 	def void setUp(){
 		home= new Home()
 		user= new Usuario()
-		user.valcode=user.username+"validado"
 		user.apellido="Aramburu"
 		user.nombre="Gustavo"
 		user.password="password"
@@ -27,6 +26,17 @@ class CrearUsuarioTest {
 		user.fnac=fnac
 		user.email="gunns@live.com.ar"
 		user.username="gunns"
+		user.valcode=user.username+"validado"
+		var Connection conn
+			try{
+			conn = home.getConnection()
+			var ps =conn.prepareStatement("TRUNCATE TABLE Usuarios")
+			ps.execute
+			}
+		finally{
+			conn.close()
+		}
+			
 	}
 	
 	@Test
@@ -69,18 +79,6 @@ class CrearUsuarioTest {
 		var user2 = user
 		home.crear(user2)
 	}
-	@After
-	def void Volver(){
-		var Connection conn
-			try{
-			conn = home.getConnection()
-			var ps =conn.prepareStatement("TRUNCATE TABLE Usuarios")
-			ps.execute
-			}
-		finally{
-			conn.close()
-		}
-			}
 }
 	
 	
