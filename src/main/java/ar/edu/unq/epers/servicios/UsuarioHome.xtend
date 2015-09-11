@@ -4,7 +4,6 @@ import java.sql.*
 import org.joda.time.DateTime
 
 class UsuarioHome {
-
 	def crear(Usuario usuarioNuevo) throws UsuarioNoPudoGuardarseException{
 		var java.util.Date d= usuarioNuevo.fnac.toDate
 		var java.sql.Date fnacsql = new java.sql.Date(d.getTime())

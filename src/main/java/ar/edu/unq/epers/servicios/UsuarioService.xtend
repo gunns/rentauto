@@ -15,8 +15,7 @@ class Sistema {
 		mail.from = "validacion@rentauto.com"
 		mail.subject= "Validacion"
 		mail.body = usuarioNuevo.valcode
-		this.envmail.enviarMail(mail)
-		
+		this.envmail.enviarMail(mail)	
 	}
 	
 	def validarCuenta(String codigoDeValidacion) throws ValidacionException{
