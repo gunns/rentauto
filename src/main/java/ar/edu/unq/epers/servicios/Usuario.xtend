@@ -1,4 +1,4 @@
-package servicios
+package ar.edu.unq.epers.servicios
 
 import org.joda.time.DateTime
 import org.eclipse.xtend.lib.annotations.Accessors

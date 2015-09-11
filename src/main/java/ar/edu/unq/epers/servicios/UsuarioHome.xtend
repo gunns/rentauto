@@ -1,12 +1,11 @@
-package servicios
+package ar.edu.unq.epers.servicios
 
-import java.sql.Connection
-import java.sql.DriverManager
+import java.sql.*
 import org.joda.time.DateTime
 
-class Home {
+class UsuarioHome {
 
-	def crear(Usuario usuarioNuevo) throws UsuarioYaExisteException{
+	def crear(Usuario usuarioNuevo) throws UsuarioNoPudoGuardarseException{
 		var java.util.Date d= usuarioNuevo.fnac.toDate
 		var java.sql.Date fnacsql = new java.sql.Date(d.getTime())
 		
@@ -23,11 +22,32 @@ class Home {
 				ps.setString(7,usuarioNuevo.password)
 				ps.execute
 				}
+		catch(SQLException e){
+			throw new UsuarioNoPudoGuardarseException()
+		}
 		finally{
 			conn.close()
 				}
 		
 	}
+	def construirUsuario(ResultSet rs) {
+	    var nombre =rs.getString("NOMBRE")
+	    var apellido=rs.getString("APELLIDO")
+	    var email=rs.getString("EMAIL")
+	    var fnac=rs.getDate("FNAC")
+	    var username=rs.getString("USERNAME")
+	    var valcode=rs.getString("VALCODE")
+	    var password=rs.getString("PASSWORD")
+	    var Usuario nwuser= new Usuario
+	    nwuser.nombre=nombre
+	    nwuser.apellido=apellido
+	    nwuser.email=email
+	    nwuser.fnac=new DateTime(fnac)
+	    nwuser.valcode=valcode
+	    nwuser.username= username
+	    nwuser.password=password
+	    return nwuser
+}
 	def getUsuarioPorCodigoDeValidacion(String codigoDeValidacion){
 		var Connection conn = null
 		try{
@@ -35,25 +55,10 @@ class Home {
 			var ps = conn.prepareStatement("SELECT * FROM Usuarios WHERE VALCODE = ?")
 			ps.setString(1,codigoDeValidacion)
 			var rs= ps.executeQuery()
-			if (rs.next){
-				var nombre =rs.getString("NOMBRE")
-				var apellido=rs.getString("APELLIDO")
-				var email=rs.getString("EMAIL")
-				var fnac=rs.getDate("FNAC")
-				var username=rs.getString("USERNAME")
-				var valcode=rs.getString("VALCODE")
-				var password=rs.getString("PASSWORD")
-				var Usuario nwuser= new Usuario
-				nwuser.nombre=nombre
-				nwuser.apellido=apellido
-				nwuser.email=email
-				nwuser.fnac=new DateTime(fnac)
-				nwuser.valcode=valcode
-				nwuser.username= username
-				nwuser.password=password
-				return nwuser
-			}else{
-				return null
+			if (rs.next) {
+   				return this.construirUsuario(rs)
+			} else {
+   				null
 			}
 		}
 		finally{
@@ -92,29 +97,14 @@ class Home {
 		var Connection conn = null
 		try{
 			conn = this.getConnection()
-			var ps = conn.prepareStatement("SELECT * FROM Usuarios WHERE VALCODE = ?")
+			var ps = conn.prepareStatement("SELECT * FROM Usuarios WHERE USERNAME = ?")
 			ps.setString(1,nomusuario)
 			var rs= ps.executeQuery()
 			if (rs.next){
-				var nombre =rs.getString("NOMBRE")
-				var apellido=rs.getString("APELLIDO")
-				var email=rs.getString("EMAIL")
-				var fnac=rs.getDate("FNAC")
-				var username=rs.getString("USERNAME")
-				var valcode=rs.getString("VALCODE")
-				var password=rs.getString("PASSWORD")
-				var Usuario nwuser= new Usuario
-				nwuser.nombre=nombre
-				nwuser.apellido=apellido
-				nwuser.email=email
-				nwuser.fnac=new DateTime(fnac)
-				nwuser.valcode=valcode
-				nwuser.username= username
-				nwuser.password=password
-				return nwuser
-			}else{
-				return null
-			}
+  				return this.construirUsuario(rs)
+			} else {
+   				null
+			}	
 		}
 		finally{
 			conn.close()

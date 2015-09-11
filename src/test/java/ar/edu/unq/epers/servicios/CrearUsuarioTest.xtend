@@ -1,4 +1,4 @@
-package servicios
+package ar.edu.unq.epers.servicios
 import org.mockito.Mock
 import org.junit.Before
 import org.joda.time.DateTime
@@ -9,12 +9,12 @@ import org.junit.After
 
 class CrearUsuarioTest {
 	protected Usuario user
-	protected Home home
+	protected UsuarioHome home
 	protected DateTime fnac
 	
 	@Before
 	def void setUp(){
-		home= new Home()
+		home= new UsuarioHome()
 		user= new Usuario()
 		user.apellido="Aramburu"
 		user.nombre="Gustavo"

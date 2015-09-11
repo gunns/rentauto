@@ -1,16 +1,21 @@
-package servicios
+package ar.edu.unq.epers.servicios
 
 import ar.edu.unq.epers.model.Empresa
 class Sistema {
 	
 	Empresa empresa
-	Home home
+	UsuarioHome home
 	EnviadorDeMails envmail
 	
 	def registrarUsuario(Usuario usuarioNuevo) throws UsuarioYaExisteException{
 		usuarioNuevo.valcode= (usuarioNuevo.username+"validado")
 		this.home.crear(usuarioNuevo)
-		this.envmail.enviar(usuarioNuevo.email,usuarioNuevo.valcode)
+		var Mail mail
+		mail.to = usuarioNuevo.email
+		mail.from = "validacion@rentauto.com"
+		mail.subject= "Validacion"
+		mail.body = usuarioNuevo.valcode
+		this.envmail.enviarMail(mail)
 		
 	}
 	
@@ -31,7 +36,7 @@ class Sistema {
 			return user.validarPassword(password)
 		}
 	}
-	def CambiarPassword(String username,String password,String nuevaPassword) throws NuevaPasswordInvalidaException{
+	def cambiarPassword(String username,String password,String nuevaPassword) throws NuevaPasswordInvalidaException{
 		var user=this.home.getUsuarioPorUsername(username)
 		if(password==nuevaPassword){
 			throw new NuevaPasswordInvalidaException
