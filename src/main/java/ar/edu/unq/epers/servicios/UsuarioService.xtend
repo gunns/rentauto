@@ -7,6 +7,22 @@ class Sistema {
 	UsuarioHome home
 	EnviadorDeMails envmail
 	
+	def getEnvMail(){
+		envmail
+	}
+	def getHome(){
+		home
+	}
+	def setEmpresa(Empresa emp){
+		empresa = emp
+	}
+	def setHome(UsuarioHome unaHome){
+		home = unaHome
+	}
+	def setEnvMails(EnviadorDeMails enviador){
+		envmail = enviador
+	}
+	
 	def registrarUsuario(Usuario usuarioNuevo) throws UsuarioYaExisteException{
 		usuarioNuevo.valcode= (usuarioNuevo.username+"validado")
 		this.home.crear(usuarioNuevo)
