@@ -24,14 +24,19 @@ class Sistema {
 	}
 	
 	def registrarUsuario(Usuario usuarioNuevo) throws UsuarioYaExisteException{
+	
+		if((this.getHome().getUsuarioPorUsername(usuarioNuevo.username)) != null){
+			throw new UsuarioYaExisteException		
+		}else{			
 		usuarioNuevo.valcode= (usuarioNuevo.username+"validado")
 		this.home.crear(usuarioNuevo)
-		var Mail mail
+		var Mail mail = new Mail()
 		mail.to = usuarioNuevo.email
 		mail.from = "validacion@rentauto.com"
 		mail.subject= "Validacion"
 		mail.body = usuarioNuevo.valcode
 		this.envmail.enviarMail(mail)	
+		}
 	}
 	
 	def validarCuenta(String codigoDeValidacion) throws ValidacionException{

@@ -35,8 +35,7 @@ class CrearUsuarioTest {
 			}
 		finally{
 			conn.close()
-		}
-			
+		}			
 	}
 	
 	@Test
@@ -67,12 +66,16 @@ class CrearUsuarioTest {
 				assertEquals(nwuser.nombre,"Gustavo")
 				assertEquals(nwuser.apellido,"Aramburu")
 				assertEquals(nwuser.email,"gunns@live.com.ar")
-				assertEquals(home.getUsuarioPorUsername("gunns"),user)
 			}
 		}
 		finally{
 			conn.close()
 		}
+	}
+	
+	@Test
+	def void testGetUserByUsername(){
+		assertEquals(home.getUsuarioPorUsername("gunns"),user)
 	}
 	
 	@Test
