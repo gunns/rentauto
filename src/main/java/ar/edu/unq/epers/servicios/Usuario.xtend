@@ -14,7 +14,7 @@ class Usuario {
 	String password
 	
 	def validate(){
-		valcode = "VALIDADO"
+		valcode = username+"validado"
 	}
 	
 	def validarPassword(String password) throws PasswordIncorrectaException{

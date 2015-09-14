@@ -16,6 +16,7 @@ class SistemaTest {
         user.nombre = "octavio"
         user.apellido = "gonzalez"
         user.username = "octi14"
+        user.password = "1234"
         user.email = "kfsk"
         
         user2 = new Usuario()
@@ -41,29 +42,70 @@ class SistemaTest {
         verify(servicio.getEnvMail()).enviarMail(any(Mail))
     }
     
-    @Test
+    @Test(expected=UsuarioYaExisteException)
     def void siQuieroGuardarUnUsuarioQueYaExisteNoMeDeja(){
     	val servicio = new Sistema()
         servicio.setHome(mock(UsuarioHome))
         servicio.setEnvMails(mock(EnviadorDeMails))
         servicio.registrarUsuario(user)
-        try{
-        	servicio.registrarUsuario(user2)
-        }catch (UsuarioYaExisteException e){
-        	assertEquals(user.username,user2.username)
+        when(servicio.getHome.getUsuarioPorUsername(user.username)).thenReturn(user)
+        servicio.registrarUsuario(user2)
         }
-    }
     
+    @Test(expected=UsuarioNoValidadoException)
 	def void siUnUsuarioSinValidarQuiereLoguearseNoLoDeja(){
-		
+        //creo el sistema y registro el usuario 'octi14'
+		val servicio = new Sistema()
+        servicio.setHome(mock(UsuarioHome))
+        servicio.setEnvMails(mock(EnviadorDeMails))
+        servicio.registrarUsuario(user)
+        when(servicio.getHome().getUsuarioPorUsername("octi14")).thenReturn(user)
+        //me logueo, pero no estoy validado
+        servicio.ingresarUsuario("octi14","1234")
+	}
+	
+	@Test(expected=NuevaPasswordInvalidaException)
+	def void siUnUsuarioQuiereCambiarSuPassWordPorElMismoNoLoDejan(){
+		//creo el sistema y registro el usuario 'octi14'
+		val servicio = new Sistema()
+        servicio.setHome(mock(UsuarioHome))
+        servicio.setEnvMails(mock(EnviadorDeMails))
+        servicio.registrarUsuario(user)
+        when(servicio.getHome().getUsuarioPorCodigoDeValidacion("octi14"+"no validado")).thenReturn(user)
+        //valido la cuenta
+        servicio.validarCuenta(user.valcode)
+        //intento cambiar el password por el mismo de antes
+        servicio.cambiarPassword("octi14","1234","1234")
+	}
+	
+	@Test
+	def void siUnUsuarioValidadoQuiereLoguearseLoDeja(){
+        //creo el sistema y registro el usuario 'octi14'
+		val servicio = new Sistema()
+        servicio.setHome(mock(UsuarioHome))
+        servicio.setEnvMails(mock(EnviadorDeMails))
+        servicio.registrarUsuario(user)
+        when(servicio.getHome().getUsuarioPorUsername("octi14")).thenReturn(user)
+        when(servicio.getHome().getUsuarioPorCodigoDeValidacion("octi14"+"no validado")).thenReturn(user)
+        //me valido
+        servicio.validarCuenta(user.valcode)
+        when(servicio.getHome().getUsuarioPorCodigoDeValidacion("octi14"+"validado")).thenReturn(user)
+        //y me logueo
+        servicio.ingresarUsuario("octi14","1234")
 	}
 
-//	def void siUnUsuarioQuiereCambiarSuPassWordPorElMismoNoLoDejan(){
-		
-	//}
-	
-	//def void siUnUsuarioQuiereCambiarSuPasswordPeroIntroduceUnoInvalido(){
-		
-	//}
+	def void siUnUsuarioCambiaSuPasswordPorOtroValidoEstaBien(){
+		//creo el sistema y registro el usuario 'octi14'
+		val servicio = new Sistema()
+        servicio.setHome(mock(UsuarioHome))
+        servicio.setEnvMails(mock(EnviadorDeMails))
+        servicio.registrarUsuario(user)
+        when(servicio.getHome().getUsuarioPorCodigoDeValidacion("octi14"+"no validado")).thenReturn(user)
+        //valido la cuenta
+        servicio.validarCuenta(user.valcode)
+        //intento cambiar el password por otro
+        servicio.cambiarPassword("octi14","1234","2345")
+        assertEquals(user.password,"2345")
+	}
 
 }

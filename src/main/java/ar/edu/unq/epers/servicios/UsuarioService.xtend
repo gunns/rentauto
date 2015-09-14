@@ -28,7 +28,7 @@ class Sistema {
 		if((this.getHome().getUsuarioPorUsername(usuarioNuevo.username)) != null){
 			throw new UsuarioYaExisteException		
 		}else{			
-		usuarioNuevo.valcode= (usuarioNuevo.username+"validado")
+		usuarioNuevo.valcode= (usuarioNuevo.username+"no validado")
 		this.home.crear(usuarioNuevo)
 		var Mail mail = new Mail()
 		mail.to = usuarioNuevo.email
@@ -48,14 +48,21 @@ class Sistema {
 			this.home.guardar(user)
 		}
 	}
+		
 	def ingresarUsuario (String username, String password) throws UsuarioNoExisteException, PasswordIncorrectaException{
 		var user= this.home.getUsuarioPorUsername(username)
 		if(user==null){
 			throw new UsuarioNoExisteException
 		}else{
-			return user.validarPassword(password)
+			user = this.home.getUsuarioPorCodigoDeValidacion(username+"validado")
+			if(user==null){
+				throw new UsuarioNoValidadoException
+			}else{			
+				return user.validarPassword(password)
+				 }
+			}
 		}
-	}
+		
 	def cambiarPassword(String username,String password,String nuevaPassword) throws NuevaPasswordInvalidaException{
 		var user=this.home.getUsuarioPorUsername(username)
 		if(password==nuevaPassword){
