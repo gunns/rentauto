@@ -23,11 +23,5 @@
         
         <property name="costoBase" type="double">
         </property>
-        
-        <property name="categoria.nombre()" type="string">
-        </property>
-        
-        <property name="ubicacionInicial.nombre()" type="string">
-        </property>
     </class>
 </hibernate-mapping>
