@@ -1,7 +1,9 @@
-package ar.edu.unq.epers.servicios
+package ar.edu.unq.epers.home
 
 import java.sql.*
 import org.joda.time.DateTime
+import ar.edu.unq.epers.servicios.Usuario
+import ar.edu.unq.epers.servicios.UsuarioNoPudoGuardarseException
 
 class UsuarioHome {
 	def crear(Usuario usuarioNuevo) throws UsuarioNoPudoGuardarseException{

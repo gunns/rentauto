@@ -4,7 +4,7 @@ import static org.mockito.Mockito.*;
 import org.junit.Test
 import org.junit.Before
 import static org.junit.Assert.*
-
+import ar.edu.unq.epers.home.UsuarioHome
 
 class SistemaTest {
 	protected Usuario user

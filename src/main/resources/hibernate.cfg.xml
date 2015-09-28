@@ -12,6 +12,8 @@
         <property name="hibernate.hbm2ddl.auto">validate</property>
         
         <mapping resource="ar/edu/unq/epers/Auto.hbm.xml"></mapping>
+        <mapping resource="ar/edu/unq/epers/Categoria.hbm.xml"></mapping>
+        <mapping resource="ar/edu/unq/epers/Ubicacion.hbm.xml"></mapping>
         
     </session-factory>
 </hibernate-configuration>
