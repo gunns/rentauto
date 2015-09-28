@@ -2,9 +2,12 @@ package ar.edu.unq.epers.servicios
 
 import org.joda.time.DateTime
 import org.eclipse.xtend.lib.annotations.Accessors
+import ar.edu.unq.epers.model.IUsuario
+import ar.edu.unq.epers.model.Reserva
+import java.util.List
 
 @Accessors
-class Usuario {
+class Usuario implements IUsuario{
 	String nombre
 	String apellido
 	String username
@@ -12,6 +15,7 @@ class Usuario {
 	DateTime fnac
 	String valcode
 	String password
+	List<Reserva> reservas = newArrayList
 	
 	def validate(){
 		valcode = username+"validado"
@@ -24,6 +28,14 @@ class Usuario {
 		else{
 			throw new PasswordIncorrectaException
 		}
+	}
+	
+	override agregarReserva(Reserva unaReserva) {
+		this.reservas.add(unaReserva)
+	}
+	
+	override getReservas() {
+		this.reservas
 	}
 	
 }
