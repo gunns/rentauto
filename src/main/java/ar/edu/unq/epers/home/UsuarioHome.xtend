@@ -1,14 +1,18 @@
 package ar.edu.unq.epers.home
 
-import java.sql.*
-import org.joda.time.DateTime
 import ar.edu.unq.epers.servicios.Usuario
 import ar.edu.unq.epers.servicios.UsuarioNoPudoGuardarseException
+import java.sql.Connection
+import java.sql.Date
+import java.sql.DriverManager
+import java.sql.ResultSet
+import java.sql.SQLException
+import org.joda.time.DateTime
 
 class UsuarioHome {
 	def crear(Usuario usuarioNuevo) throws UsuarioNoPudoGuardarseException{
 		var java.util.Date d= usuarioNuevo.fnac.toDate
-		var java.sql.Date fnacsql = new java.sql.Date(d.getTime())
+		var Date fnacsql = new Date(d.getTime())
 		
 		var Connection conn = null 
 		try{
@@ -74,7 +78,7 @@ class UsuarioHome {
 	
 	def guardar(Usuario usuario) {
 		var java.util.Date d= usuario.fnac.toDate
-		var java.sql.Date fnacsql = new java.sql.Date(d.getTime())
+		var Date fnacsql = new Date(d.getTime())
 		var Connection conn = null 
 		try{
 				conn = this.getConnection()

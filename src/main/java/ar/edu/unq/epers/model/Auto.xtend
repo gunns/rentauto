@@ -6,6 +6,8 @@ import org.eclipse.xtend.lib.annotations.Accessors
 
 @Accessors
 class Auto {
+	Integer id;
+	
 	String marca
 	String modelo
 	Integer año
@@ -16,6 +18,8 @@ class Auto {
 	//Debe estar ordenado
 	List<Reserva> reservas = newArrayList()
 	Ubicacion ubicacionInicial
+	
+	new() {}
 
 	new(String marca, String modelo, Integer anio, String patente, Categoria categoria, Double costoBase, Ubicacion ubicacionInicial){
 		this.marca = marca
