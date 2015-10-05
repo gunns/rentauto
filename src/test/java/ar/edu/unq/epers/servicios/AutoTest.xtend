@@ -10,8 +10,8 @@ import ar.edu.unq.epers.model.Deportivo
 import org.junit.Assert
 import ar.edu.unq.epers.home.SessionManager
 import ar.edu.unq.epers.home.ModelHome
-import java.util.Date
 import org.joda.time.DateTime
+import static org.mockito.Mockito. *;
 
 class AutoTest {
 	protected Auto auto
@@ -33,9 +33,12 @@ class AutoTest {
 			res.origen = loc
 			res.destino = loc
 			res.inicio = DateTime.now().toDate
-			res.
+			res.fin = DateTime.now().toDate
+			res.auto = auto
+			res.usuario = mock(Usuario)
 			
-			
+			auto.agregarReserva(res)
+						
 			new ModelHome(Auto).save(auto)
 			return null
 		]
