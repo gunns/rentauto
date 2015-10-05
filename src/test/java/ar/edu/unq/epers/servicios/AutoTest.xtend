@@ -10,6 +10,8 @@ import ar.edu.unq.epers.model.Deportivo
 import org.junit.Assert
 import ar.edu.unq.epers.home.SessionManager
 import ar.edu.unq.epers.home.ModelHome
+import java.util.Date
+import org.joda.time.DateTime
 
 class AutoTest {
 	protected Auto auto
@@ -25,6 +27,14 @@ class AutoTest {
 			loc = new Ubicacion
 			loc.nombre = "Italia"
 			auto = new Auto("lamborgotti","fasterossa", 2005, "tsm201", cat, 0.15, loc)
+			
+			res = new Reserva()
+			res.numeroSolicitud = 1
+			res.origen = loc
+			res.destino = loc
+			res.inicio = DateTime.now().toDate
+			res.
+			
 			
 			new ModelHome(Auto).save(auto)
 			return null

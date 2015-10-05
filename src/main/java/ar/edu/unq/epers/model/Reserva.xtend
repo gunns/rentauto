@@ -18,6 +18,7 @@ class Reserva {
 	IUsuario usuario
 	
 	new () {}
+	
 	def costo() {
 		val cantidadDeDias = Days.daysBetween(new DateTime(inicio), new DateTime(fin)).days
 		return cantidadDeDias * auto.costoTotal;
