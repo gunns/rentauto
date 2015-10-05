@@ -8,6 +8,8 @@ import org.junit.Before
 import org.junit.Test
 import ar.edu.unq.epers.model.Deportivo
 import org.junit.Assert
+import ar.edu.unq.epers.home.SessionManager
+import ar.edu.unq.epers.home.ModelHome
 
 class CrearUsuarioTest {
 	protected Auto auto
@@ -17,12 +19,15 @@ class CrearUsuarioTest {
 	
 	@Before
 	def void setUp(){
-		cat = new Deportivo
-		cat.nombre = "SuperSport"
-		loc = new Ubicacion("Italia")
-		auto = new Auto("lamborgotti","fasterossa", 2005, "tsm201", cat, 0.15, loc)
-		
-		
+		SessionManager.runInSession[
+			cat = new Deportivo
+			cat.nombre = "SuperSport"
+			loc = new Ubicacion("Italia")
+			auto = new Auto("lamborgotti","fasterossa", 2005, "tsm201", cat, 0.15, loc)
+			
+			new ModelHome(Auto).save(auto)
+			return null
+		]
 	}
 	
 	@Test

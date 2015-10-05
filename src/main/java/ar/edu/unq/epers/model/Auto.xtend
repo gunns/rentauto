@@ -19,7 +19,8 @@ class Auto {
 	List<Reserva> reservas = newArrayList()
 	Ubicacion ubicacionInicial
 	
-	new() {}
+	new(){
+	}
 
 	new(String marca, String modelo, Integer anio, String patente, Categoria categoria, Double costoBase, Ubicacion ubicacionInicial){
 		this.marca = marca

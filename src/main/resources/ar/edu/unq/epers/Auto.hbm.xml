@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
  
 <hibernate-mapping>
-    <class name="ar.edu.unq.epers.model.Auto" table="autos" >
+    <class name="ar.edu.unq.epers.model.Auto" table="auto" >
         <id name="id" type="java.lang.Integer">
             <column name="ID" />
             <generator class="identity" />
