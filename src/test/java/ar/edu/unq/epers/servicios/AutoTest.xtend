@@ -11,7 +11,7 @@ import org.junit.Assert
 import ar.edu.unq.epers.home.SessionManager
 import ar.edu.unq.epers.home.ModelHome
 
-class CrearUsuarioTest {
+class AutoTest {
 	protected Auto auto
 	protected Categoria cat
 	protected Reserva res
@@ -31,9 +31,11 @@ class CrearUsuarioTest {
 	}
 	
 	@Test
-	def void pruebaDeCreacion(){
-		val auto = ServiceProvider.autoService.consultar(1)
-		Assert.assertEquals("lamborgotti", auto.marca)
+	def void crearAutoOk(){
+		//me traigo al primer auto de la tabla, lo llamo autoa
+		val autoa = ServiceProvider.autoService.consultar(1)
+		//auto se guarda, cuando pregunto por su marca me la devuelve.
+		Assert.assertEquals("lamborgotti", autoa.marca)
 	}
 	
 	@Test
