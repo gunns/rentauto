@@ -22,7 +22,8 @@ class AutoTest {
 		SessionManager.runInSession[
 			cat = new Deportivo
 			cat.nombre = "SuperSport"
-			loc = new Ubicacion("Italia")
+			loc = new Ubicacion
+			loc.nombre = "Italia"
 			auto = new Auto("lamborgotti","fasterossa", 2005, "tsm201", cat, 0.15, loc)
 			
 			new ModelHome(Auto).save(auto)

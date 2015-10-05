@@ -23,5 +23,21 @@
         
         <property name="costoBase" type="double">
         </property>
+        
+        <many-to-one name="categoria" class="ar.edu.unq.epers.model.Categoria"
+       	column="catID"
+       	not-null="true"
+       	cascade="all"/>
+       	
+       	<many-to-one name="ubicacion" class="ar.edu.unq.epers.model.Ubicacion"
+       	column="locID"
+       	not-null="true"
+       	cascade="all"/>
+       	
+<!--        	<set name="reservas" cascade="all"> -->
+<!--         <key column="resID"  -->
+<!--             not-null="true"/> -->
+<!--         <one-to-many class="ar.edu.unq.epers.model.Reserva"/> -->
+<!--    		</set> -->
     </class>
 </hibernate-mapping>
