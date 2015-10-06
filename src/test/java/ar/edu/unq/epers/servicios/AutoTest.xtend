@@ -18,6 +18,7 @@ class AutoTest {
 	protected Categoria cat
 	protected Reserva res
 	protected Ubicacion loc
+	protected Usuario usuario
 	
 	@Before
 	def void setUp(){
@@ -27,15 +28,27 @@ class AutoTest {
 			loc = new Ubicacion
 			loc.nombre = "Italia"
 			auto = new Auto("lamborgotti","fasterossa", 2005, "tsm201", cat, 0.15, loc)
+			var date = new DateTime
+			date.withYear(1987)
+			date.withMonthOfYear(4)
+			date.withDayOfMonth(27)
+			var fnac = date.toDate		
+		    usuario = new Usuario
+			usuario.nombre= "victoria"
+			usuario.apellido= "frente para la"
+			usuario.username= "vi-k"
+			usuario.fnac= fnac
+			usuario.password="surundanga"
 			
-			res = new Reserva()
+			
+			res = new Reserva
 			res.numeroSolicitud = 1
 			res.origen = loc
 			res.destino = loc
 			res.inicio = DateTime.now().toDate
 			res.fin = DateTime.now().toDate
 			res.auto = auto
-			res.usuario = mock(Usuario)
+			res.usuario = usuario
 			
 			auto.agregarReserva(res)
 						

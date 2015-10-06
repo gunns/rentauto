@@ -1,18 +1,19 @@
 package ar.edu.unq.epers.servicios
 
-import org.joda.time.DateTime
-import org.eclipse.xtend.lib.annotations.Accessors
 import ar.edu.unq.epers.model.IUsuario
 import ar.edu.unq.epers.model.Reserva
+import java.util.Date
 import java.util.List
+import org.eclipse.xtend.lib.annotations.Accessors
 
 @Accessors
 class Usuario implements IUsuario{
+	int dni
 	String nombre
 	String apellido
 	String username
 	String email
-	DateTime fnac
+	Date fnac
 	String valcode
 	String password
 	List<Reserva> reservas = newArrayList

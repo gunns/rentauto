@@ -43,6 +43,9 @@ class ServiceProvider{
 	static def getReservaService(){
 		new ModelService(Reserva)
 	}
+	static def getUsuarioService(){
+		new ModelService(Usuario)
+	}
 	
 }
 
