@@ -32,12 +32,12 @@ class AutoTest {
 			date.withYear(1987)
 			date.withMonthOfYear(4)
 			date.withDayOfMonth(27)
-			var fnac = date.toDate		
+			//var fnac = date.toDate		
 		    usuario = new Usuario
 			usuario.nombre= "victoria"
 			usuario.apellido= "frente para la"
 			usuario.username= "vi-k"
-			usuario.fnac= fnac
+			usuario.fnac= date
 			usuario.password="surundanga"
 			
 			

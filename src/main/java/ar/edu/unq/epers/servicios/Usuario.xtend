@@ -5,6 +5,7 @@ import ar.edu.unq.epers.model.Reserva
 import java.util.Date
 import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
+import org.joda.time.DateTime
 
 @Accessors
 class Usuario implements IUsuario{
@@ -13,7 +14,7 @@ class Usuario implements IUsuario{
 	String apellido
 	String username
 	String email
-	Date fnac
+	DateTime fnac
 	String valcode
 	String password
 	List<Reserva> reservas = newArrayList
