@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+ 
+<hibernate-mapping>
+    <class name="ar.edu.unq.epers.model.Reserva" >
+        <id name="id" type="java.lang.Integer">
+            <column name="ID" />
+            <generator class="identity" />
+        </id>
+
+        <property name="numeroSolicitud" type="int">
+        </property>
+                
+        <property name="inicio" type="date">
+    	</property>
+    	
+        <property name="fin" type="date">
+        </property>
+        
+    </class>
+</hibernate-mapping>
