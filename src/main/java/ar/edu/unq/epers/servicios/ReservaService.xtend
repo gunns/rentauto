@@ -8,7 +8,4 @@ class ReservaService extends ModelService<Reserva>{
 		super(modelType)
 	}
 	
-	//def 
-	//SessionManager.runInSession
-	
 }
