@@ -4,8 +4,8 @@
  
 <hibernate-mapping>
     <class name="ar.edu.unq.epers.model.Reserva" >
-        <id name="id" type="java.lang.Integer">
-            <column name="ID" />
+        <id name="reserva_id" type="java.lang.Integer">
+            <column name="reserva_id" />
             <generator class="identity" />
         </id>
 
@@ -18,5 +18,6 @@
         <property name="fin" type="date">
         </property>
         
+        <many-to-one name="Auto" column="auto_res_id"></many-to-one>
     </class>
 </hibernate-mapping>

@@ -6,7 +6,7 @@ import org.eclipse.xtend.lib.annotations.Accessors
 
 @Accessors
 class Auto {
-	Integer id;
+	Integer auto_id;
 	
 	String marca
 	String modelo

@@ -8,7 +8,7 @@ import org.joda.time.Days
 
 @Accessors
 class Reserva {
-	Integer id
+	Integer reserva_id
 	Integer numeroSolicitud
 	Ubicacion origen
 	Ubicacion destino

@@ -5,7 +5,7 @@ import org.eclipse.xtend.lib.annotations.Accessors
 
 @Accessors 
 class Ubicacion {
-	Integer id
+	Integer ubicacion_id
 	String nombre
 	
 	new () {}
