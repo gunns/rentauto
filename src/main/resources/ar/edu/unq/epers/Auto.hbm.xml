@@ -34,7 +34,7 @@
        	not-null="true"
        	cascade="all"/>
        	
-       	<list name="reservasAutos" cascade="all" inverse="true">
+       	<list name="reservas" cascade="all" inverse="true">
         <key column="auto_res_id" 
             not-null="true"/>
         <index column="idx"/> 

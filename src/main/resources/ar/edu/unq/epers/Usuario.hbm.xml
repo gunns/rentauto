@@ -30,7 +30,7 @@
 		<property name="password" type="string">
     	</property>
     	
-       	<list name="reservasUsuarios" cascade="all">
+       	<list name="reservas" cascade="all">
         <key column="resIDusr" 
             not-null="true"/>
         <index column="idx"/> 
