@@ -15,9 +15,11 @@ class AutoHome extends ModelHome<Auto> {
 		return query.list()
 	}
 	
-	/*def getCategoriaAuto(String nombre){
-		val query SessionManager.getSession().createQuery("select
-									from Auto as auto
-									where auto.categoria.nombre = :Deportivo")
-	}*/
+	def cantidadAutosModelo(String categoria) {
+      val query = SessionManager::getSession().createQuery("select  
+                        from Auto as auto 
+                        where auto.categoria.nombre = :Deportivo")
+      //query.setInteger("mod", modelo)
+      return query.uniqueResult() as Categoria
+   }
 }
