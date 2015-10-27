@@ -12,7 +12,7 @@ class AutoService extends ModelService<Auto>{
 	
 	def getCategoriaAuto(String nombre){
 		SessionManager.runInSession([
-			//new AutoHome().getCategoriaAuto(nombre)
+			new AutoHome().getCategoriaAuto(nombre)
 			nombre
 		]);
 	}
