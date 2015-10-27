@@ -12,6 +12,8 @@ import org.joda.time.DateTime
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
+import java.util.List
+import java.util.ArrayList
 
 class AutoTest {
 	protected Auto auto
@@ -21,6 +23,7 @@ class AutoTest {
 	protected Ubicacion locdos
 	protected Usuario usuario
 	protected Auto autodos
+	protected List<Auto> autos = new ArrayList<Auto>()
 	
 	@Before
 	def void setUp(){
@@ -56,6 +59,10 @@ class AutoTest {
 			res.usuario = usuario
 			
 			auto.agregarReserva(res)
+			
+			
+			autos.add(auto)
+			autos.add(autodos)
 						
 			new AutoHome().save(auto)
 			new AutoHome().save(autodos)
@@ -74,7 +81,7 @@ class AutoTest {
 	@Test
 	def void testGetCategoriaAuto(){
 		var autoServ = new AutoService()
-		Assert.assertEquals(cat,autoServ.getCategoriaAuto("Deportivo"))
+		Assert.assertEquals(autos,autoServ.getCategoriaAuto("Deportivo"))
 	}
 	/* 
 	@Test
