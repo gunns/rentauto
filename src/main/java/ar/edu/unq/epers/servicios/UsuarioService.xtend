@@ -1,7 +1,9 @@
 package ar.edu.unq.epers.servicios
 
-import ar.edu.unq.epers.model.Empresa
 import ar.edu.unq.epers.home.UsuarioHome
+import ar.edu.unq.epers.model.Empresa
+import ar.edu.unq.epers.model.Usuario
+
 class UsuarioService {
 	
 	Empresa empresa

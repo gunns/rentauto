@@ -1,10 +1,13 @@
 package ar.edu.unq.epers.servicios
 
-import static org.mockito.Mockito.*;
-import org.junit.Test
-import org.junit.Before
-import static org.junit.Assert.*
 import ar.edu.unq.epers.home.UsuarioHome
+import ar.edu.unq.epers.model.Usuario
+import org.junit.Before
+import org.junit.Test
+
+import static org.junit.Assert.*
+import static org.mockito.Matchers.*
+import static org.mockito.Mockito.*
 
 class UsuarioTest {
 	protected Usuario user
