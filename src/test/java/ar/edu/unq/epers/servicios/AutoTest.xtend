@@ -85,10 +85,24 @@ class AutoTest {
 		var autoServ = new AutoService()
 		var List<Auto> deportivosIniciales = new ArrayList<Auto>()
 		deportivosIniciales = autoServ.getCategoriaAuto("Deportivo")
+		//pido los autos Deportivo de la base de datos
+		Assert.assertEquals(deportivosIniciales,autos)
+		//comparo la lista de autos que tengo yo (son todos Deportivo)
+		//con la de los autos que la query me dice que son Deportivo
+	}
+	
+	@Test
+	def void testGetAutosConUbicacionParaDia(){
+				var autoServ = new AutoService()
+		var List<Auto> deportivosIniciales = new ArrayList<Auto>()
+		deportivosIniciales = autoServ.getCategoriaAuto("Deportivo")
+		//Busco los autos Deportivo de la base de datos
 		var List<Auto> autosDeportivos = new ArrayList<Auto>()
 		autosDeportivos = autoServ.getCategoriaAuto("Deportivo")
+		//Creo otra lista con autos deportivos
 		for (var int i=1;i<autosDeportivos.size();i++){
 			if(autosDeportivos.get(i-1).ubicacionParaDia(DateTime.now().toDate())!=loc){
+				//uno por uno los saco si la ubicacion para dia es la que quiero
 				autosDeportivos.remove(i-1)
 			}
 		}

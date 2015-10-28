@@ -5,6 +5,7 @@ import ar.edu.unq.epers.model.Auto
 import ar.edu.unq.epers.model.Categoria
 import java.util.ArrayList
 import org.joda.time.DateTime
+import java.util.Date
 
 class AutoHome extends ModelHome<Auto> {
 	
@@ -26,5 +27,5 @@ class AutoHome extends ModelHome<Auto> {
 				query.setString("value", nomCategoria)
 				//le digo a la query que "value" es el nombe de la categoria parámetro
       return query.list() as ArrayList<Auto>
-   }
+	}
 }
