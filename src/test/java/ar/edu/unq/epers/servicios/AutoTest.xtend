@@ -23,6 +23,7 @@ class AutoTest {
 	protected Ubicacion locdos
 	protected Usuario usuario
 	protected Auto autodos
+	protected List<Auto> listaRetornada = new ArrayList<Auto>
 	protected List<Auto> autos = new ArrayList<Auto>()
 	
 	@Before
@@ -66,6 +67,7 @@ class AutoTest {
 						
 			new AutoHome().save(auto)
 			new AutoHome().save(autodos)
+			listaRetornada = new AutoHome().getAll()
 			return null
 		]
 	}
@@ -81,7 +83,7 @@ class AutoTest {
 	@Test
 	def void testGetCategoriaAuto(){
 		var autoServ = new AutoService()
-		Assert.assertEquals(autos,autoServ.getCategoriaAuto("Deportivo"))
+		Assert.assertEquals(listaRetornada,autoServ.getCategoriaAuto("Deportivo"))
 	}
 	/* 
 	@Test

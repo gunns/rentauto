@@ -4,6 +4,7 @@ import ar.edu.unq.epers.home.ModelHome
 import ar.edu.unq.epers.model.Auto
 import ar.edu.unq.epers.model.Categoria
 import java.util.ArrayList
+import org.joda.time.DateTime
 
 class AutoHome extends ModelHome<Auto> {
 	
@@ -13,7 +14,7 @@ class AutoHome extends ModelHome<Auto> {
 	
 	def getAll() {
 		val query = SessionManager::getSession().createQuery("from Auto")
-		return query.list()
+		return query.list() as ArrayList<Auto>
 	}
 	
 	def getCategoriaAuto(String nomCategoria) {
