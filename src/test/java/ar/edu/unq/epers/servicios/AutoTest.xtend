@@ -54,7 +54,7 @@ class AutoTest {
 			res.numeroSolicitud = 1
 			res.origen = loc
 			res.destino = loc
-			res.inicio = DateTime.now().toDate
+			res.inicio = DateTime.now().minusDays(4).toDate
 			res.fin = DateTime.now().toDate
 			res.auto = auto
 			res.usuario = usuario
@@ -83,7 +83,16 @@ class AutoTest {
 	@Test
 	def void testGetCategoriaAuto(){
 		var autoServ = new AutoService()
-		Assert.assertEquals(listaRetornada,autoServ.getCategoriaAuto("Deportivo"))
+		var List<Auto> deportivosIniciales = new ArrayList<Auto>()
+		deportivosIniciales = autoServ.getCategoriaAuto("Deportivo")
+		var List<Auto> autosDeportivos = new ArrayList<Auto>()
+		autosDeportivos = autoServ.getCategoriaAuto("Deportivo")
+		for (var int i=1;i<autosDeportivos.size();i++){
+			if(autosDeportivos.get(i-1).ubicacionParaDia(DateTime.now().toDate())!=loc){
+				autosDeportivos.remove(i-1)
+			}
+		}
+		Assert.assertEquals(deportivosIniciales,autosDeportivos)
 	}
 	/* 
 	@Test
