@@ -14,11 +14,11 @@ class ReservaService extends ModelService<Reserva>{
 		super(Reserva)
 	}
 	
-	def crearReserva(Auto auto,Ubicacion origen,String categoria,Ubicacion destino, DateTime inicio, DateTime fin,Usuario user){
+	def crearReserva(Integer numSol,Auto auto,Ubicacion origen,String categoria,Ubicacion destino, DateTime inicio, DateTime fin,Usuario user){
 	
 		SessionManager.runInSession[
 		var res = new Reserva
-			res.numeroSolicitud = new ReservaHome().getAll().last.numeroSolicitud+1
+			res.numeroSolicitud = numSol//new ReservaHome().getAll().last.numeroSolicitud+1
 			res.origen = origen
 			res.destino = destino
 			res.inicio = DateTime.now().minusDays(4).toDate()

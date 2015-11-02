@@ -1,13 +1,7 @@
 package ar.edu.unq.epers.home
 
-import ar.edu.unq.epers.model.Auto
 import ar.edu.unq.epers.model.Usuario
 import ar.edu.unq.epers.servicios.UsuarioNoPudoGuardarseException
-import java.sql.Connection
-import java.sql.Date
-import java.sql.DriverManager
-import java.sql.ResultSet
-import java.sql.SQLException
 import java.util.ArrayList
 
 class UsuarioHome extends ModelHome<Usuario>{
@@ -17,8 +11,8 @@ class UsuarioHome extends ModelHome<Usuario>{
 	}
 	
 	def crear(Usuario usuarioNuevo) throws UsuarioNoPudoGuardarseException{
-		var java.util.Date d= usuarioNuevo.fnac
-		var Date fnacsql = new Date(d.getTime())
+		//var Date d= usuarioNuevo.fnac
+		//var Date fnacsql = new Date(d.getTime())
 	}
 		
 	def getAll() {

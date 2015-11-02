@@ -15,6 +15,7 @@ import org.junit.Before
 
 class TestsSetUp {
 	protected Auto auto
+	protected Integer numSol
 	protected Categoria cat
 	protected Reserva res
 	protected Reserva resdos
@@ -50,7 +51,7 @@ class TestsSetUp {
 			usuario.fnac= fnac
 			usuario.password="surundanga"
 			autodos= new Auto("Audi","r8",2010,"skt015",cat,0.15,locdos)
-			
+			numSol=3
 			
 			res = new Reserva
 			res.numeroSolicitud = 1
