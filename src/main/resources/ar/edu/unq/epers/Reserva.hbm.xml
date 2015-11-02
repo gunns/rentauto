@@ -18,7 +18,13 @@
         <property name="fin" type="date">
         </property>
         
-        <many-to-one name="auto" column="auto"></many-to-one>
+        <many-to-one name="origen" class="ar.edu.unq.epers.model.Ubicacion" cascade="all" lazy="false"
+        column="origen" not-null="true"/>
+        
+        <many-to-one name="destino" class="ar.edu.unq.epers.model.Ubicacion" cascade="all" lazy="false"
+        column="destino" not-null="true"/>
+        
+        <many-to-one name="auto" column="auto"/>
         
         <many-to-one 	name="usuario" 
         				class="ar.edu.unq.epers.model.Usuario" 

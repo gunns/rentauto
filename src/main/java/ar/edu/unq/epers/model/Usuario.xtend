@@ -1,12 +1,9 @@
 package ar.edu.unq.epers.model
 
-import ar.edu.unq.epers.model.IUsuario
-import ar.edu.unq.epers.model.Reserva
+import ar.edu.unq.epers.servicios.PasswordIncorrectaException
 import java.util.Date
 import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
-import org.joda.time.DateTime
-import ar.edu.unq.epers.servicios.PasswordIncorrectaException
 
 @Accessors
 class Usuario implements IUsuario{

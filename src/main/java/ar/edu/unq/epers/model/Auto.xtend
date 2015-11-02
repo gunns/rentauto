@@ -59,4 +59,8 @@ class Auto {
 		return categoria.calcularCosto(this)
 	}
 	
+	override def equals(Object obj){
+		obj instanceof Auto && this.auto_id == (obj as Auto).auto_id
+	}
+	
 }

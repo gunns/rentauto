@@ -6,7 +6,7 @@ import ar.edu.unq.epers.model.Usuario
 
 class UsuarioService {
 	
-	Empresa empresa
+	/*Empresa empresa
 	UsuarioHome home
 	EnviadorDeMails envmail
 	
@@ -78,5 +78,5 @@ class UsuarioService {
 			userVal.password=nuevaPassword
 			this.home.guardar(userVal)
 		}
-	}
+	}*/
 }

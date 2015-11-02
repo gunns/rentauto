@@ -1,10 +1,12 @@
 package ar.edu.unq.epers.servicios
 
-import ar.edu.unq.epers.model.Auto
 import ar.edu.unq.epers.home.AutoHome
 import ar.edu.unq.epers.home.SessionManager
+import ar.edu.unq.epers.model.Auto
 import java.util.ArrayList
 import java.util.List
+import org.joda.time.DateTime
+import ar.edu.unq.epers.model.Ubicacion
 
 class AutoService extends ModelService<Auto>{
 	
@@ -12,12 +14,12 @@ class AutoService extends ModelService<Auto>{
 		super(Auto)
 	}
 	
-	def getCategoriaAuto(String nombre){
+	def getAutoParaReserva(Ubicacion origen,String nomCategoria,DateTime fechaInicio,DateTime fechaFin){
 		var List<Auto > autos
 		autos = new ArrayList<Auto>
 		SessionManager.runInSession([
 			
-			new AutoHome().getCategoriaAuto(nombre)
+			new AutoHome().getAutoParaReserva(origen,nomCategoria,fechaInicio,fechaFin)
 			
 		]);
 	}

@@ -19,12 +19,14 @@ class AutoTest {
 	protected Auto auto
 	protected Categoria cat
 	protected Reserva res
+	protected Reserva resdos
 	protected Ubicacion loc
 	protected Ubicacion locdos
 	protected Usuario usuario
 	protected Auto autodos
 	protected List<Auto> listaRetornada = new ArrayList<Auto>
 	protected List<Auto> autos = new ArrayList<Auto>()
+	protected List<Auto> autosbis = new ArrayList<Auto>()
 	
 	@Before
 	def void setUp(){
@@ -40,7 +42,7 @@ class AutoTest {
 			date.withYear(1987)
 			date.withMonthOfYear(4)
 			date.withDayOfMonth(27)
-			var fnac = date.toDate		
+			var fnac = date.toDate()		
 		    usuario = new Usuario
 			usuario.nombre= "victoria"
 			usuario.apellido= "frenteparala"
@@ -54,15 +56,27 @@ class AutoTest {
 			res.numeroSolicitud = 1
 			res.origen = loc
 			res.destino = loc
-			res.inicio = DateTime.now().minusDays(4).toDate
-			res.fin = DateTime.now().toDate
+			res.inicio = DateTime.now().minusDays(4).toDate()
+			res.fin = DateTime.now().toDate()
 			res.auto = auto
 			res.usuario = usuario
 			
+			resdos = new Reserva
+			resdos.numeroSolicitud = 2
+			resdos.origen = locdos
+			resdos.destino = loc
+			resdos.inicio = DateTime.now().minusDays(8).toDate()
+			resdos.fin = DateTime.now().minusDays(2).toDate()
+			resdos.auto = autodos
+			resdos.usuario = usuario
+			
 			auto.agregarReserva(res)
+			autodos.agregarReserva(resdos)
 			
 			
-			autos.add(auto)
+			autosbis.add(auto)
+			autosbis.add(autodos)
+			
 			autos.add(autodos)
 						
 			new AutoHome().save(auto)
@@ -81,33 +95,24 @@ class AutoTest {
 	}
 	
 	@Test
-	def void testGetCategoriaAuto(){
+	def void testGetLosQueCumplenEstricto(){
 		var autoServ = new AutoService()
-		var List<Auto> deportivosIniciales = new ArrayList<Auto>()
-		deportivosIniciales = autoServ.getCategoriaAuto("Deportivo")
-		//pido los autos Deportivo de la base de datos
-		Assert.assertEquals(deportivosIniciales,autos)
-		//comparo la lista de autos que tengo yo (son todos Deportivo)
-		//con la de los autos que la query me dice que son Deportivo
+		var List<Auto> deportivosQueCumplen = new ArrayList<Auto>()
+		deportivosQueCumplen = autoServ.getAutoParaReserva(loc,"Deportivo",DateTime.now(),DateTime.now().plusDays(2))
+		//pido los que cumplen con las especificaciones (solo el dos porque el uno tiene una reserva hasta hoy)
+		Assert.assertEquals(autos,deportivosQueCumplen)
 	}
 	
 	@Test
-	def void testGetAutosConUbicacionParaDia(){
-				var autoServ = new AutoService()
-		var List<Auto> deportivosIniciales = new ArrayList<Auto>()
-		deportivosIniciales = autoServ.getCategoriaAuto("Deportivo")
-		//Busco los autos Deportivo de la base de datos
-		var List<Auto> autosDeportivos = new ArrayList<Auto>()
-		autosDeportivos = autoServ.getCategoriaAuto("Deportivo")
-		//Creo otra lista con autos deportivos
-		for (var int i=1;i<autosDeportivos.size();i++){
-			if(autosDeportivos.get(i-1).ubicacionParaDia(DateTime.now().toDate())!=loc){
-				//uno por uno los saco si la ubicacion para dia es la que quiero
-				autosDeportivos.remove(i-1)
-			}
-		}
-		Assert.assertEquals(deportivosIniciales,autosDeportivos)
+	def void testGetTodosLosQueCumplenTodo(){
+		var autoServ = new AutoService()
+		var List<Auto> deportivosQueCumplenConDos = new ArrayList<Auto>()
+		deportivosQueCumplenConDos = autoServ.getAutoParaReserva(loc,"Deportivo",DateTime.now().plusDays(4),DateTime.now().plusDays(5))
+		//la ultima reserva es hoy asi que me tendria que traer a todos los autos
+		Assert.assertEquals(autosbis,deportivosQueCumplenConDos)
 	}
+	
+	//def void testGetNinguno()
 	/* 
 	@Test
 	def void pruebaDeFalla(){
