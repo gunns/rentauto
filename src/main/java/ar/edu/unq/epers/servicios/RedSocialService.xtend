@@ -12,35 +12,35 @@ class RedSocialService {
 		new RedSocialHome(graph)
 	}
 
-	def eliminarPersona(Usuario user) {
+	def eliminarUsuario(Usuario user) {
 		GraphServiceRunner::run[
 			createHome(it).eliminarNodo(user)
 			null
 		]
 	}
 
-	def agregarPersona(Usuario user) {
+	def agregarUsuario(Usuario user) {
 		GraphServiceRunner::run[
 			createHome(it).crearNodo(user); 
 			null
 		]
 	}
 
-	def AmigoDe(Usuario usuario, Usuario amigo) {
+	def amigoDe(Usuario usuario, Usuario amigo) {
 		GraphServiceRunner::run[
 			val home = createHome(it);
 			home.relacionar(usuario, amigo, TipoDeRelaciones.Amigo)
 		]
 	}
 
-	def AmigosDeAmigosDe(Usuario user) {
+	def amigosDeAmigosDe(Usuario user) {
 		GraphServiceRunner::run[
 			val home = createHome(it);
 			home.getAmigosDeAmigosDe(user)
 		]
 	}
 
-	def AmigosDe(Usuario user) {
+	def amigosDe(Usuario user) {
 		GraphServiceRunner::run[
 			val home = createHome(it)
 			home.getAmigosDe(user)

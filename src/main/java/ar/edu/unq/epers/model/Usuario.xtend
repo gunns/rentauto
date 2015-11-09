@@ -37,5 +37,8 @@ class Usuario implements IUsuario{
 	override getReservas() {
 		this.reservas
 	}
+	override def equals(Object obj){
+		obj instanceof Usuario && this.username == (obj as Usuario).username
+	}
 	
 }

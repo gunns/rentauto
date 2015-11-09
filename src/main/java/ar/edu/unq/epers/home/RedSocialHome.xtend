@@ -64,8 +64,10 @@ class RedSocialHome {
 	}
 
 	def getAmigosDeAmigosDe(Usuario user) {
-		val AmigosDeAmigos = this.getAmigosDe(user)
-		AmigosDeAmigos.map[this.getAmigosDe(it)].flatten.toSet
+		val amigosDeAmigos = this.getAmigosDe(user)
+		val amigos =amigosDeAmigos.map[this.getAmigosDe(it)].flatten.toSet
+		amigos.remove(user)
+		return amigos
 	}
 
 
