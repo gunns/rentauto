@@ -12,7 +12,6 @@ import org.junit.Test
 class AutoTest extends TestsSetUp {
 	
 	
-	
 	@Test
 	def void crearAutoOk(){
 		//me traigo al primer auto de la tabla, lo llamo autoa

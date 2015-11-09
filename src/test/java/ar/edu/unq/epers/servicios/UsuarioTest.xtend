@@ -1,28 +1,26 @@
 package ar.edu.unq.epers.servicios
 
-import ar.edu.unq.epers.model.Usuario
+import ar.edu.unq.epers.home.UsuarioHome
+import org.junit.Assert
+import org.junit.Test
 
-class UsuarioTest {
-	protected Usuario user
+class UsuarioTest extends TestsSetUp{
+	/*protected Usuario user
 	protected Usuario user2
+	*/
+	
+	@Test
+	def void crearUsuarioOk(){
+		new UsuarioHome().save(usuario)
+		val usuario1 = ServiceProvider.usuarioService.consultar(1)
+		//auto se guarda, cuando pregunto por su marca me la devuelve.
+		Assert.assertEquals("vik", usuario1.username)
+	}
+	
 	
 	/* @Before
-	def void setUp(){
-		user = new Usuario()
-        user.nombre = "octavio"
-        user.apellido = "gonzalez"
-        user.username = "octi14"
-        user.password = "1234"
-        user.email = "kfsk"
-        
-        user2 = new Usuario()
-        user2.nombre = "octavio"
-        user2.apellido = "martinez"
-        user2.username = "octi14"
-        user2.email = "kfsk"
-        
-	}
-	/* 
+	
+
 	@Test
     def void siGuardoUnUsuarioQueNoExisteTodoBien() {
            

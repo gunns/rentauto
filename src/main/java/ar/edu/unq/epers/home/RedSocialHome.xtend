@@ -48,11 +48,11 @@ class RedSocialHome {
 		nodo1.createRelationshipTo(nodo2, relacion);
 	}
 	
-	
 	private def toUser(Node nodo) {
 		new Usuario => [
 			username = nodo.getProperty("username") as String
 			email = nodo.getProperty("email") as String
+			nombre = nodo.getProperty("nombre") as String
 			apellido = nodo.getProperty("apellido") as String
 		]
 	}
@@ -68,9 +68,14 @@ class RedSocialHome {
 		AmigosDeAmigos.map[this.getAmigosDe(it)].flatten.toSet
 	}
 
-
 	protected def nodosRelacionados(Node nodo, RelationshipType tipo, Direction direccion) {
 		nodo.getRelationships(tipo, direccion).map[it.getOtherNode(nodo)]
 	}
-
+	
+	def getConexionesCon(Usuario user) {
+		val amigos  = this.getAmigosDe(user)
+		val amigosDeAmigos = this.getAmigosDeAmigosDe(user)
+		val conexiones = amigos.addAll(amigosDeAmigos)
+		conexiones
+	}
 }

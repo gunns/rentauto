@@ -1,6 +1,33 @@
 package ar.edu.unq.epers.servicios
 
-class UsuarioService {
+import ar.edu.unq.epers.model.Usuario
+import java.util.Date
+import ar.edu.unq.epers.home.SessionManager
+import ar.edu.unq.epers.home.UsuarioHome
+
+class UsuarioService extends ModelService<Usuario>{
+		
+	new() {
+		super(Usuario)
+	}
+	
+	/* 
+	def crearUsuario(String nombre,	String apellido, String username, String email,	Date fnac, String password){
+	
+		SessionManager.runInSession[
+		var user = new Usuario
+			user.nom = nombre
+			user.ape = apellido
+			user.mail = email
+			user.nomUsuario = username
+			user.fnacim = fnac
+			user.contrasenha = password
+						
+			new UsuarioHome().save(user)
+			null
+			]
+	}
+	*/
 	
 	/*Empresa empresa
 	UsuarioHome home
