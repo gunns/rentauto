@@ -6,7 +6,7 @@ import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 
-class FamiliaServiceTest {
+class RedSocialTest {
 	Usuario user1
 	Usuario user2
 	Usuario user3
@@ -25,7 +25,7 @@ class FamiliaServiceTest {
 	def void amigosDeAmigosDe(){
 		val amigosDeAmigos = service.amigosDeAmigosDe(user1)
 		
-		Assert.assertEquals(2, amigosDeAmigos.length)
+		Assert.assertEquals(3, amigosDeAmigos.length)
 		Assert.assertTrue(amigosDeAmigos.contains(user3))
 		Assert.assertTrue(amigosDeAmigos.contains(user4))
 	}

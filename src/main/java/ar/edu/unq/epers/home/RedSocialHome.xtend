@@ -8,6 +8,8 @@ import org.neo4j.graphdb.DynamicLabel
 import org.neo4j.graphdb.GraphDatabaseService
 import org.neo4j.graphdb.Node
 import org.neo4j.graphdb.RelationshipType
+import org.neo4j.graphdb.traversal.Evaluators
+import org.neo4j.graphdb.traversal.TraversalDescription
 
 @Accessors
 class RedSocialHome {
@@ -64,10 +66,12 @@ class RedSocialHome {
 	}
 
 	def getAmigosDeAmigosDe(Usuario user) {
-		val amigosDeAmigos = this.getAmigosDe(user)
-		val amigos =amigosDeAmigos.map[this.getAmigosDe(it)].flatten.toSet
-		amigos.remove(user)
-		return amigos
+		/*val amigosDeAmigos = this.getAmigosDe(user)
+		amigosDeAmigos.map[this.getAmigosDe(it)].flatten.toSet*/
+		var TraversalDescription td = graph.traversalDescription()
+		.breadthFirst().relationships( TipoDeRelaciones.Amigo, Direction.BOTH )
+            .evaluator( Evaluators.excludeStartPosition() );
+    	td.traverse(getNodo(user)).nodes.map[toUser].toSet
 	}
 
 

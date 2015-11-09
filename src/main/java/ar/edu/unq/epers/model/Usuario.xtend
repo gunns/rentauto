@@ -40,5 +40,8 @@ class Usuario implements IUsuario{
 	override def equals(Object obj){
 		obj instanceof Usuario && this.username == (obj as Usuario).username
 	}
+	override def hashCode() {
+		this.username.hashCode()
+	}
 	
 }
