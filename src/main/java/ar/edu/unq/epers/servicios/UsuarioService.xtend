@@ -1,7 +1,20 @@
 package ar.edu.unq.epers.servicios
 
-class UsuarioService {
+import ar.edu.unq.epers.model.Usuario
+
+class UsuarioService extends ModelService<Usuario>{
+	 
+	RedSocialService red = new RedSocialService()
 	
+	new() {
+		super(Usuario)
+	}
+	
+	def crearUsuario(Usuario user){
+		
+		super.crearModel(user)
+		red.agregarUsuario(user)
+	}
 	/*Empresa empresa
 	UsuarioHome home
 	EnviadorDeMails envmail
