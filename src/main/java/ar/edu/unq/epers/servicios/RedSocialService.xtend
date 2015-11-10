@@ -1,6 +1,7 @@
 package ar.edu.unq.epers.servicios
 
 import ar.edu.unq.epers.home.RedSocialHome
+import ar.edu.unq.epers.model.Mensaje
 import ar.edu.unq.epers.model.TipoDeRelaciones
 import ar.edu.unq.epers.model.Usuario
 import org.neo4j.graphdb.GraphDatabaseService
@@ -39,11 +40,25 @@ class RedSocialService {
 			home.getAmigosDeAmigosDe(user)
 		]
 	}
+	
+	def verMisMsg(Usuario user){
+		GraphServiceRunner::run[
+			val home = createHome(it);
+			home.getMsgs(user)
+		]
+	}
 
 	def amigosDe(Usuario user) {
 		GraphServiceRunner::run[
 			val home = createHome(it)
 			home.getAmigosDe(user)
+		]
+	}
+	
+	def enviarMensaje(Usuario to,Usuario from,Mensaje mensaje){
+		GraphServiceRunner::run[
+			val home= createHome(it);
+			home.relacionar(mensaje,from,TipoDeRelaciones.From,to,TipoDeRelaciones.To)
 		]
 	}
 

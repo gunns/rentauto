@@ -1,6 +1,8 @@
 package ar.edu.unq.epers.servicios
 
+import ar.edu.unq.epers.model.Mensaje
 import ar.edu.unq.epers.model.Usuario
+import org.joda.time.DateTime
 import org.junit.After
 import org.junit.Assert
 import org.junit.Before
@@ -11,6 +13,7 @@ class RedSocialTest {
 	Usuario user2
 	Usuario user3
 	Usuario user4
+	Mensaje msg
 	RedSocialService service
 	
 	
@@ -28,6 +31,13 @@ class RedSocialTest {
 		Assert.assertEquals(3, amigosDeAmigos.length)
 		Assert.assertTrue(amigosDeAmigos.contains(user3))
 		Assert.assertTrue(amigosDeAmigos.contains(user4))
+	}
+	
+	@Test
+	def void Mensaje(){
+		val mensaje= service.verMisMsg(user4)
+		Assert.assertEquals(1,mensaje.length)
+		Assert.assertEquals(user1,mensaje.head.from)
 	}
 	
 	@After
@@ -65,6 +75,14 @@ class RedSocialTest {
 			apellido = "Garcia"
 		];
 		
+		msg = new Mensaje => [
+			id= DateTime.now().hashCode
+			mensaje = "tu auto esta que mola (?"
+			to = user4
+			from = user1
+			fecha = DateTime.now()
+		];
+		
 		
 		service = new RedSocialService
 		service.agregarUsuario(user1)
@@ -74,5 +92,6 @@ class RedSocialTest {
 		service.amigoDe(user1,user2)
 		service.amigoDe(user2, user3)
 		service.amigoDe(user2, user4)
+		service.enviarMensaje(user4,user1,msg)
 	}
 }

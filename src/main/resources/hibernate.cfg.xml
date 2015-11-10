@@ -17,5 +17,6 @@
         <mapping resource="ar/edu/unq/epers/Ubicacion.hbm.xml"></mapping>
         <mapping resource="ar/edu/unq/epers/Reserva.hbm.xml"></mapping>
         <mapping resource="ar/edu/unq/epers/Usuario.hbm.xml"></mapping>
+        <mapping resource="ar/edu/unq/epers/Mensaje.hbm.xml"></mapping>
     </session-factory>
 </hibernate-configuration>
