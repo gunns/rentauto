@@ -97,6 +97,7 @@ class RedSocialHome {
 		new Usuario => [
 			username = nodo.getProperty("username") as String
 			email = nodo.getProperty("email") as String
+			nombre = nodo.getProperty("nombre") as String
 			apellido = nodo.getProperty("apellido") as String
 		]
 	}
@@ -116,7 +117,6 @@ class RedSocialHome {
     	td.traverse(getNodo(user)).nodes.map[toUser].toSet
 	}
 
-
 	protected def nodosRelacionados(Node nodo, RelationshipType tipo, Direction direccion) {
 		nodo.getRelationships(tipo, direccion).map[it.getOtherNode(nodo)]
 	}
@@ -129,4 +129,10 @@ class RedSocialHome {
 		node
 	}
 
+	def getConexionesCon(Usuario user) {
+		val amigos  = this.getAmigosDe(user)
+		val amigosDeAmigos = this.getAmigosDeAmigosDe(user)
+		val conexiones = amigos.addAll(amigosDeAmigos)
+		conexiones
+	}
 }

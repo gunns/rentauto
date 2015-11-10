@@ -22,6 +22,8 @@ class TestsSetUp {
 	protected Ubicacion loc
 	protected Ubicacion locdos
 	protected Usuario usuario
+	protected Usuario usuario2
+	protected Usuario usuario3
 	protected Auto autodos
 	protected DateTime inicio
 	protected DateTime fin
@@ -50,6 +52,18 @@ class TestsSetUp {
 			usuario.username= "vik"
 			usuario.fnac= fnac
 			usuario.password="surundanga"
+			usuario2 = new Usuario
+			usuario2.nombre= "octavio"
+			usuario2.apellido= "gonzalez"
+			usuario2.username= "octi14"
+			usuario2.fnac= fnac
+			usuario2.password="cualquiera"
+			usuario3 = new Usuario
+			usuario3.nombre= "otro"
+			usuario3.apellido= "usuario"
+			usuario3.username= "otrousuario"
+			usuario3.fnac= fnac
+			usuario3.password="unomas"
 			autodos= new Auto("Audi","r8",2010,"skt015",cat,0.15,locdos)
 			numSol=3
 			

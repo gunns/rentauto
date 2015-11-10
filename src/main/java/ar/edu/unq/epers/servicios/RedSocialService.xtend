@@ -8,7 +8,6 @@ import org.neo4j.graphdb.GraphDatabaseService
 
 class RedSocialService {
 
-
 	private def createHome(GraphDatabaseService graph) {
 		new RedSocialHome(graph)
 	}
@@ -59,6 +58,13 @@ class RedSocialService {
 		GraphServiceRunner::run[
 			val home= createHome(it);
 			home.relacionar(mensaje,from,TipoDeRelaciones.From,to,TipoDeRelaciones.To)
+		]
+	}
+	
+	def personasConLasQueEstaConectado(Usuario user){
+		GraphServiceRunner::run[
+			val home = createHome(it)
+			home.getConexionesCon(user)
 		]
 	}
 
