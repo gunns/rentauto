@@ -97,7 +97,6 @@ class RedSocialHome {
 		new Usuario => [
 			username = nodo.getProperty("username") as String
 			email = nodo.getProperty("email") as String
-			nombre = nodo.getProperty("nombre") as String
 			apellido = nodo.getProperty("apellido") as String
 		]
 	}
