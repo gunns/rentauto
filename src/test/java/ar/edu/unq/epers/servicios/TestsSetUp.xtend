@@ -3,11 +3,13 @@ package ar.edu.unq.epers.servicios
 import ar.edu.unq.epers.home.AutoHome
 import ar.edu.unq.epers.home.SessionManager
 import ar.edu.unq.epers.model.Auto
+import ar.edu.unq.epers.model.Calificacion
 import ar.edu.unq.epers.model.Categoria
 import ar.edu.unq.epers.model.Deportivo
 import ar.edu.unq.epers.model.Reserva
 import ar.edu.unq.epers.model.Ubicacion
 import ar.edu.unq.epers.model.Usuario
+import ar.edu.unq.epers.model.Visibilidad
 import java.util.ArrayList
 import java.util.List
 import org.joda.time.DateTime
@@ -30,6 +32,7 @@ class TestsSetUp {
 	protected List<Auto> listaRetornada = new ArrayList<Auto>
 	protected List<Auto> autos = new ArrayList<Auto>()
 	protected List<Auto> autosbis = new ArrayList<Auto>()
+	protected ComentarioService comservice
 	
 	@Before
 	def void setUp(){
@@ -93,6 +96,10 @@ class TestsSetUp {
 			autosbis.add(autodos)
 			
 			autos.add(autodos)
+			
+			this.comservice = new ComentarioService(usuario)
+			comservice.nuevoComentario(Calificacion.Bueno,"el auto fue bueno",Visibilidad.Publico,auto)
+			comservice.nuevoComentario(Calificacion.Excelente,"el auto fue excelente",Visibilidad.SoloAmigos,autodos)
 			
 			inicio = DateTime.now().plusDays(15)
 			fin = DateTime.now().plusDays(25)
