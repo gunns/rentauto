@@ -1,16 +1,20 @@
 package ar.edu.unq.epers.home
 
 import ar.edu.unq.epers.model.Comentario
-import java.util.List
+import ar.edu.unq.epers.model.Visibilidad
+import org.mongojack.DBQuery
 
 class ComentarioHome {
 	Collection<Comentario> homeComentarios
 	
-	new (){
+	new (){   
 		homeComentarios = SistemDB.instance().collection(Comentario)
 	}
-	def toComentario(Comentario comm){
-	homeComentarios.insert(comm)
+	def addComentario(Comentario comm){
+	homeComentarios.insert(comm)   
 	}
 	
+	def getComentariosPublicos(){
+		val query = DBQuery.in("vis",Visibilidad.SoloAmigos)
+	}
 }
