@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty
 import org.mongojack.ObjectId
 
 class Comentario {
+	Usuario user
 	Calificacion cal
 	String texto
 	Visibilidad vis
@@ -12,11 +13,12 @@ class Comentario {
 	@JsonProperty("_id")
 	String id
 	
-	new(Calificacion cal,String texto,Visibilidad vis,Auto auto){
+	new(Calificacion cal,String texto,Visibilidad vis,Auto auto,Usuario user){
 		this.cal=cal
 		this.texto=texto
 		this.vis= vis
 		this.auto = auto
+		this.user= user
 
 	}
 	
