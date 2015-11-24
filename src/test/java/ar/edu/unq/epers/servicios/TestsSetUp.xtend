@@ -97,10 +97,6 @@ class TestsSetUp {
 			
 			autos.add(autodos)
 			
-			this.comservice = new ComentarioService(usuario)
-			comservice.nuevoComentario(Calificacion.Bueno,"el auto fue bueno",Visibilidad.Publico,auto)
-			comservice.nuevoComentario(Calificacion.Excelente,"el auto fue excelente",Visibilidad.SoloAmigos,autodos)
-			
 			inicio = DateTime.now().plusDays(15)
 			fin = DateTime.now().plusDays(25)
 						
@@ -109,5 +105,8 @@ class TestsSetUp {
 			listaRetornada = new AutoHome().getAll()
 			return null
 		]
+		this.comservice = new ComentarioService(usuario)
+		this.comservice.nuevoComentario(Calificacion.Bueno,"el auto fue bueno",Visibilidad.Publico,auto)
+		this.comservice.nuevoComentario(Calificacion.Excelente,"el auto fue excelente",Visibilidad.SoloAmigos,autodos)
 	}
 }
