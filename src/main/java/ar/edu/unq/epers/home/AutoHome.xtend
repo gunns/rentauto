@@ -13,6 +13,7 @@ class AutoHome extends ModelHome<Auto> {
 	
 	def getAll() {
 		val query = SessionManager::getSession().createQuery("from Auto")
+		//busco todos los autos y devuelvo la lista como un array list
 		return query.list() as ArrayList<Auto>
 	}
 	
@@ -24,7 +25,9 @@ class AutoHome extends ModelHome<Auto> {
 				where auto.categoria.nombre = :nombreCat 
 				and (reserva = null or (:fechaInicio > reserva.fin or :fechaFin < reserva.inicio))
 				and reserva.destino.nombre = :origen")
-				
+				//la query hace un join entre los autos, sus reservas y los destinos de las reservas
+				//pide que el auto sea de la categoría parametro.
+				//y si tiene reservas busca las que el destino sea igual al origen de la reserva que se pretende realizar
 				//busco todos los autos que cuya categoria tenga el nombre "value"
 				query.setParameter("nombreCat", nomCategoria)
 				query.setParameter("fechaInicio", fechaInicio.toDate())

@@ -20,7 +20,7 @@ class AutoService extends ModelService<Auto>{
 		SessionManager.runInSession([
 			
 			new AutoHome().getAutoParaReserva(origen,nomCategoria,fechaInicio,fechaFin)
-			
+			//en la home busco los autos disponibles para la reserva deseada.
 		]);
 	}
 }

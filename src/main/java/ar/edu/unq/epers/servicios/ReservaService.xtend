@@ -29,5 +29,7 @@ class ReservaService extends ModelService<Reserva>{
 			new ReservaHome().save(res)
 			null
 			]
+			//crea una reserva con los datos solicitados a
+			//la home.
 	}
 }
