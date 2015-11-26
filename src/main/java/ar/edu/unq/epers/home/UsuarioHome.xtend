@@ -20,7 +20,10 @@ class UsuarioHome extends ModelHome<Usuario>{
 		return query.list() as ArrayList<Usuario>
 	}
 	
-		/*var Connection conn = null 
+		/* TP 1 (MySQL) - Guardar usuario 
+		 * 
+		 * 
+		 * var Connection conn = null 
 		try{
 				conn = this.getConnection()
 				var ps= conn.prepareStatement("INSERT INTO Usuarios (NOMBRE, APELLIDO, EMAIL, FNAC, USERNAME, VALCODE, PASSWORD) VALUES (?,?,?,?,?,?,?)")
@@ -41,6 +44,9 @@ class UsuarioHome extends ModelHome<Usuario>{
 				}
 		
 	}
+	* 
+	* TP 1 (MySQL) - Construir usuario 
+	* 
 	def construirUsuario(ResultSet rs) {
 	    var nombre =rs.getString("NOMBRE")
 	    var apellido=rs.getString("APELLIDO")
@@ -59,6 +65,9 @@ class UsuarioHome extends ModelHome<Usuario>{
 	    nwuser.password=password
 	    return nwuser
 }
+* 
+* 	TP 1 (MySQL) - Traer usuario por valcode 
+* 
 	def getUsuarioPorCodigoDeValidacion(String codigoDeValidacion){
 		var Connection conn = null
 		try{
@@ -81,7 +90,8 @@ class UsuarioHome extends ModelHome<Usuario>{
 		Class.forName("com.mysql.jdbc.Driver");
 		return DriverManager.getConnection("jdbc:mysql://localhost/Rentauto?user=root&password=root");
 	}
-	
+	TP 1 (MySQL) - Guardar usuario
+	* 
 	def guardar(Usuario usuario) {
 		var java.util.Date d= usuario.fnac
 		var Date fnacsql = new Date(d.getTime())

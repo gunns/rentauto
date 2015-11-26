@@ -8,7 +8,9 @@ class UsuarioService extends ModelService<Usuario>{
 		super(Usuario)
 	}
 	
-	/* 
+	/* TP 2 (Hibernate)- crearUsuario
+	 * 
+	 * 
 	def crearUsuario(String nombre,	String apellido, String username, String email,	Date fnac, String password){
 	
 		SessionManager.runInSession[

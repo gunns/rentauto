@@ -108,5 +108,9 @@ class TestsSetUp {
 		this.comservice = new ComentarioService(usuario)
 		this.comservice.nuevoComentario(Calificacion.Bueno,"el auto fue bueno",Visibilidad.Publico,auto)
 		this.comservice.nuevoComentario(Calificacion.Excelente,"el auto fue excelente",Visibilidad.SoloAmigos,autodos)
+	
+		this.comservice = new ComentarioService(usuario2)
+		this.comservice.nuevoComentario(Calificacion.Malo,"el auto fue malo",Visibilidad.Privado,auto)
+		this.comservice.nuevoComentario(Calificacion.Regular,"el auto fue regularrrrrr",Visibilidad.SoloAmigos,autodos)
 	}
 }

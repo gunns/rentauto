@@ -2,7 +2,9 @@ package ar.edu.unq.epers.model
 
 import com.fasterxml.jackson.annotation.JsonProperty
 import org.mongojack.ObjectId
+import org.eclipse.xtend.lib.annotations.Accessors
 
+@Accessors
 class Comentario {
 	Usuario user
 	Calificacion cal
