@@ -25,10 +25,8 @@ class ComentariosTest extends TestsSetUp{
 	@Test
 	def quieroChequearSiSeGuardoBienLaDescripcionDelComentario(){
 		var comservice=new ComentarioService(usuario)
-		var perfil =comservice.verPerfil(usuario)
-		
-		var comentario= perfil.toArray().get(0)
-		
+		var Iterable<Comentario> perfil =comservice.verPerfil(usuario)
+		var comentario = perfil.toList().head
 		Assert.assertEquals(comentario.texto, "el auto fue excelente")
 		
 	}

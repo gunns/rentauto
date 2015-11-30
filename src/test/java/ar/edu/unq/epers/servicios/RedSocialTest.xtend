@@ -8,12 +8,13 @@ import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 
-class RedSocialTest extends TestsSetUp {
+class RedSocialTest {
 	Usuario user1
 	Usuario user2
 	Usuario user3
 	Usuario user4
 	Mensaje msg
+	RedSocialService redSocialService
 
 	
 	

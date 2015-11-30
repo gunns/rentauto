@@ -36,6 +36,7 @@ class TestsSetUp {
 	public RedSocialService redSocialService
 	@Before
 	def void setUp(){
+		//en sesión de hibernate creo todo lo referido a tablas.
 		SessionManager.runInSession[
 			cat = new Deportivo
 			cat.nombre = "Deportivo"
@@ -55,18 +56,21 @@ class TestsSetUp {
 			usuario.username= "vik"
 			usuario.fnac= fnac
 			usuario.password="surundanga"
+			usuario.email = "scioliganaporampliadiferencia@c5n.com"
 			usuario2 = new Usuario
 			usuario2.nombre= "octavio"
 			usuario2.apellido= "gonzalez"
 			usuario2.username= "octi14"
 			usuario2.fnac= fnac
 			usuario2.password="cualquiera"
+			usuario2.email = "macriganoalas7delatarde@c5n.com"
 			usuario3 = new Usuario
 			usuario3.nombre= "otro"
 			usuario3.apellido= "usuario"
 			usuario3.username= "otrousuario"
 			usuario3.fnac= fnac
 			usuario3.password="unomas"
+			usuario3.email = "hoyterminaronlosrecuentos@vicfabrice.com"
 			autodos= new Auto("Audi","r8",2010,"skt015",cat,0.15,locdos)
 			numSol=3
 			
@@ -105,14 +109,21 @@ class TestsSetUp {
 			listaRetornada = new AutoHome().getAll()
 			return null
 		]
+		
+		//creo la red social y agrego los dos nodos de usuarios
+		
 		this.redSocialService =new RedSocialService()
 		this.redSocialService.agregarUsuario(usuario)
 		this.redSocialService.agregarUsuario(usuario2)
 		
+		//comento con un usuario dos autos distintos
+		
 		this.comservice = new ComentarioService(usuario)
 		this.comservice.nuevoComentario(Calificacion.Bueno,"el auto fue bueno",Visibilidad.Publico,auto)
 		this.comservice.nuevoComentario(Calificacion.Excelente,"el auto fue excelente",Visibilidad.SoloAmigos,autodos)
-	
+		
+		// comento con otro usuario dos autos distintos
+		
 		this.comservice = new ComentarioService(usuario2)
 		this.comservice.nuevoComentario(Calificacion.Malo,"el auto fue malo",Visibilidad.Privado,auto)
 		this.comservice.nuevoComentario(Calificacion.Regular,"el auto fue regularrrrrr",Visibilidad.SoloAmigos,autodos)
