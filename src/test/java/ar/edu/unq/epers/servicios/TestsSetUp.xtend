@@ -33,7 +33,7 @@ class TestsSetUp {
 	protected List<Auto> autos = new ArrayList<Auto>()
 	protected List<Auto> autosbis = new ArrayList<Auto>()
 	protected ComentarioService comservice
-	
+	public RedSocialService redSocialService
 	@Before
 	def void setUp(){
 		SessionManager.runInSession[
@@ -105,6 +105,10 @@ class TestsSetUp {
 			listaRetornada = new AutoHome().getAll()
 			return null
 		]
+		this.redSocialService =new RedSocialService()
+		this.redSocialService.agregarUsuario(usuario)
+		this.redSocialService.agregarUsuario(usuario2)
+		
 		this.comservice = new ComentarioService(usuario)
 		this.comservice.nuevoComentario(Calificacion.Bueno,"el auto fue bueno",Visibilidad.Publico,auto)
 		this.comservice.nuevoComentario(Calificacion.Excelente,"el auto fue excelente",Visibilidad.SoloAmigos,autodos)

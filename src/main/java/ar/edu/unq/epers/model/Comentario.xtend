@@ -10,7 +10,7 @@ class Comentario {
 	Calificacion cal
 	String texto
 	Visibilidad vis
-	Auto auto
+	String patenteAuto
 	@ObjectId
 	@JsonProperty("_id")
 	String id
@@ -19,7 +19,7 @@ class Comentario {
 		this.cal=cal
 		this.texto=texto
 		this.vis= vis
-		this.auto = auto
+		this.patenteAuto = auto.patente
 		this.user= user
 
 	}

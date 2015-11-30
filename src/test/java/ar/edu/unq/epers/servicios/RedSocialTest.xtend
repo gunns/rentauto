@@ -8,25 +8,25 @@ import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 
-class RedSocialTest {
+class RedSocialTest extends TestsSetUp {
 	Usuario user1
 	Usuario user2
 	Usuario user3
 	Usuario user4
 	Mensaje msg
-	RedSocialService service
+
 	
 	
 	@Test
 	def void esAmigo(){
-		val amigos = service.amigosDe(user1)
+		val amigos = this.redSocialService.amigosDe(user1)
 		Assert.assertEquals(1, amigos.length)
 		Assert.assertEquals(amigos.head, user2)
 	}
 	
 	@Test
 	def void amigosDeAmigosDe(){
-		val amigosDeAmigos = service.amigosDeAmigosDe(user1)
+		val amigosDeAmigos = this.redSocialService.amigosDeAmigosDe(user1)
 		
 		Assert.assertEquals(3, amigosDeAmigos.length)
 		Assert.assertTrue(amigosDeAmigos.contains(user3))
@@ -35,17 +35,17 @@ class RedSocialTest {
 	
 	@Test
 	def void Mensaje(){
-		val mensaje= service.verMisMsg(user4)
+		val mensaje= this.redSocialService.verMisMsg(user4)
 		Assert.assertEquals(1,mensaje.length)
 		Assert.assertEquals(user1,mensaje.head.from)
 	}
 	
 	@After
 	def void after(){
-		service.eliminarUsuario(user1)
-		service.eliminarUsuario(user2)
-		service.eliminarUsuario(user3)
-		service.eliminarUsuario(user4)
+		this.redSocialService.eliminarUsuario(user1)
+		this.redSocialService.eliminarUsuario(user2)
+		this.redSocialService.eliminarUsuario(user3)
+		this.redSocialService.eliminarUsuario(user4)
 	}
 	
 	
@@ -84,14 +84,14 @@ class RedSocialTest {
 		];
 		
 		
-		service = new RedSocialService
-		service.agregarUsuario(user1)
-		service.agregarUsuario(user2)
-		service.agregarUsuario(user3)
-		service.agregarUsuario(user4)
-		service.amigoDe(user1,user2)
-		service.amigoDe(user2, user3)
-		service.amigoDe(user2, user4)
-		service.enviarMensaje(user4,user1,msg)
+		this.redSocialService = new RedSocialService
+		this.redSocialService.agregarUsuario(user1)
+		this.redSocialService.agregarUsuario(user2)
+		this.redSocialService.agregarUsuario(user3)
+		this.redSocialService.agregarUsuario(user4)
+		this.redSocialService.amigoDe(user1,user2)
+		this.redSocialService.amigoDe(user2, user3)
+		this.redSocialService.amigoDe(user2, user4)
+		this.redSocialService.enviarMensaje(user4,user1,msg)
 	}
 }

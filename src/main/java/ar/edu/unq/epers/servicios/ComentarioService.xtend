@@ -15,13 +15,15 @@ class ComentarioService {
 	
 	new(Usuario user){
 		this.usuario=user
+		this.comentarioHome= new ComentarioHome()
+		this.redSocial = new RedSocialService()
 	}
 	
 	def verPerfil(Usuario user){
 	switch user{
 		case user==this.usuario:
 			this.mostrarPerfilCompleto(user)
-		case redSocial.amigosDe(user).contains(this.usuario):
+		case this.redSocial.amigosDe(user).contains(this.usuario):
 			this.mostrarPerfilDeAmigo(user)
 		default:
 			this.mostrarPerfilPublico(user)	
@@ -39,6 +41,7 @@ class ComentarioService {
 	
 	def mostrarPerfilDeAmigo(Usuario usuario) {
 		this.comentarioHome.getComentariosSoloAmigos(usuario)
+		this.comentarioHome.getComentariosPublicos(usuario)
 	}
 	
 	def nuevoComentario(Calificacion cal,String texto,Visibilidad vis,Auto auto){
