@@ -27,6 +27,7 @@ class ComentariosTest extends TestsSetUp{
 		var comservice=new ComentarioService(usuario)
 		var Iterable<Comentario> perfil =comservice.verPerfil(usuario)
 		var comentario = perfil.toList().head
+		//test
 		Assert.assertEquals(comentario.texto, "el auto fue excelente")
 		
 	}
