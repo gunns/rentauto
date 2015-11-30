@@ -44,4 +44,9 @@ class Usuario implements IUsuario{
 		this.username.hashCode()
 	}
 	
+	def tieneAutoEnReserva(Auto a){
+		this.reservas.exists[it.getAuto == a]
+		true
+	}
+	
 }

@@ -45,8 +45,14 @@ class ComentarioService {
 	}
 	
 	def nuevoComentario(Calificacion cal,String texto,Visibilidad vis,Auto auto){
-		var com = new Comentario(cal,texto,vis,auto,this.usuario)
-		this.comentarioHome.addComentario(com)
+		if(!this.usuario.tieneAutoEnReserva(auto)){
+			throw new NoLoAlquiloException()
+		}
+		else {
+			var com = new Comentario(cal,texto,vis,auto,this.usuario)
+			this.comentarioHome.addComentario(com)
+		}
 	}
 }
+
 	

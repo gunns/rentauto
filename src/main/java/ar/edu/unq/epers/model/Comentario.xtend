@@ -15,6 +15,8 @@ class Comentario {
 	@JsonProperty("_id")
 	String id
 	
+	new (){}
+	
 	new(Calificacion cal,String texto,Visibilidad vis,Auto auto,Usuario user){
 		this.cal=cal
 		this.texto=texto
