@@ -4,13 +4,22 @@
  
 <hibernate-mapping>
     <class name="ar.edu.unq.epers.model.Categoria" >
-        <id name="id" type="java.lang.Integer">
-            <column name="ID" />
+        <id name="categoria_id" type="java.lang.Integer">
+            <column name="categoria_id" />
             <generator class="identity" />
         </id>
-
+		<discriminator column="Clase" type="string"/>
         <property name="nombre" type="string">
         </property>
         
+    
+    <subclass name="ar.edu.unq.epers.model.Turismo" extends="ar.edu.unq.epers.model.Categoria" discriminator-value="Turismo" />
+    
+    <subclass name="ar.edu.unq.epers.model.Familiar" extends="ar.edu.unq.epers.model.Categoria" discriminator-value="Familiar" />
+    
+    <subclass name="ar.edu.unq.epers.model.Deportivo" extends="ar.edu.unq.epers.model.Categoria" discriminator-value="Deportivo" />
+    
+    <subclass name="ar.edu.unq.epers.model.TodoTerreno" extends="ar.edu.unq.epers.model.Categoria" discriminator-value="TodoTerreno" />
+    
     </class>
 </hibernate-mapping>

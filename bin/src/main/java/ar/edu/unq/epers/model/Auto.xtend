@@ -6,7 +6,7 @@ import org.eclipse.xtend.lib.annotations.Accessors
 
 @Accessors
 class Auto {
-	Integer id;
+	Integer auto_id;
 	
 	String marca
 	String modelo
@@ -57,6 +57,10 @@ class Auto {
 	
 	def costoTotal(){
 		return categoria.calcularCosto(this)
+	}
+	
+	override def equals(Object obj){
+		obj instanceof Auto && this.auto_id == (obj as Auto).auto_id
 	}
 	
 }

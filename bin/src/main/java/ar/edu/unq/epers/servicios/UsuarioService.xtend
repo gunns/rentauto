@@ -1,10 +1,39 @@
 package ar.edu.unq.epers.servicios
 
-import ar.edu.unq.epers.model.Empresa
-import ar.edu.unq.epers.home.UsuarioHome
-class UsuarioService {
+import ar.edu.unq.epers.model.Usuario
+
+class UsuarioService extends ModelService<Usuario>{
+		
+	new() {
+		super(Usuario)
+	}
 	
-	Empresa empresa
+	/* TP 2 (Hibernate)- crearUsuario
+	 * 
+	 * 
+	def crearUsuario(String nombre,	String apellido, String username, String email,	Date fnac, String password){
+	
+		SessionManager.runInSession[
+		var user = new Usuario
+			user.nom = nombre
+			user.ape = apellido
+			user.mail = email
+			user.nomUsuario = username
+			user.fnacim = fnac
+			user.contrasenha = password
+						
+			new UsuarioHome().save(user)
+			null
+			]
+	}
+	*/
+	
+//	def crearUsuario(Usuario user){
+//		
+//		super.crearModel(user)
+//		red.agregarUsuario(user)
+//	}
+	/*Empresa empresa
 	UsuarioHome home
 	EnviadorDeMails envmail
 	
@@ -76,5 +105,5 @@ class UsuarioService {
 			userVal.password=nuevaPassword
 			this.home.guardar(userVal)
 		}
-	}
+	}*/
 }

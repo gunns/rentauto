@@ -1,44 +1,38 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
- 
-<hibernate-mapping>
-    <class name="ar.edu.unq.epers.model.Auto" table="auto" >
-        <id name="id" type="java.lang.Integer">
-            <column name="ID" />
-            <generator class="identity" />
-        </id>
 
-        <property name="marca" type="string">
-        </property>
-                
-        <property name="modelo" type="string">
-    	</property>
-    	
-        <property name="año" type="int">
-        </property>
-        
-        <property name="patente" type="string">
-        </property>
-        
-        <property name="costoBase" type="double">
-        </property>
-        
-        <many-to-one name="categoria" class="ar.edu.unq.epers.model.Categoria"
-       	column="catID"
-       	not-null="true"
-       	cascade="all"/>
-       	
-       	<many-to-one name="ubicacionInicial" class="ar.edu.unq.epers.model.Ubicacion"
-       	column="locID"
-       	not-null="true"
-       	cascade="all"/>
-       	
-       	<list name="reservasAutos" cascade="all">
-        <key column="resIDaut" 
-            not-null="true"/>
-        <index column="idx"/> 
-        <one-to-many class="ar.edu.unq.epers.model.Reserva"/>
-   		</list>
-    </class>
+<hibernate-mapping>
+	<class name="ar.edu.unq.epers.model.Auto">
+		<id name="auto_id" type="java.lang.Integer">
+			<column name="auto_id" />
+			<generator class="identity" />
+		</id>
+
+		<property name="marca" type="string">
+		</property>
+
+		<property name="modelo" type="string">
+		</property>
+
+		<property name="año" type="int">
+		</property>
+
+		<property name="patente" type="string">
+		</property>
+
+		<property name="costoBase" type="double">
+		</property>
+
+		<many-to-one name="categoria" class="ar.edu.unq.epers.model.Categoria"
+			lazy="false" column="catID" not-null="true" cascade="all" />
+
+		<many-to-one name="ubicacionInicial" class="ar.edu.unq.epers.model.Ubicacion"
+			lazy="false" column="locID" not-null="true" cascade="all" />
+
+		<bag name="reservas" cascade="all" inverse="true" lazy="false">
+			<key column="auto" not-null="true" />
+			<one-to-many class="ar.edu.unq.epers.model.Reserva" />
+		</bag>
+	</class>
 </hibernate-mapping>
