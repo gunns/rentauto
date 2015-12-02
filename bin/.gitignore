@@ -2,7 +2,3 @@ target/
 .classpath
 .project
 .settings/
-/.gitignore
-/README.md
-/pom.xml
-/src/
