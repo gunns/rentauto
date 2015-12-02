@@ -1,9 +1,8 @@
 package ar.edu.unq.epers.servicios
 
+import ar.edu.unq.epers.model.Comentario
 import org.junit.Assert
 import org.junit.Test
-import java.util.List
-import ar.edu.unq.epers.model.Comentario
 
 class ComentariosTest extends TestsSetUp{
 	
