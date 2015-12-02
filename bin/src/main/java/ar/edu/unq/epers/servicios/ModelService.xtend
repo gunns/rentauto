@@ -6,7 +6,6 @@ import ar.edu.unq.epers.model.Auto
 import ar.edu.unq.epers.model.Categoria
 import ar.edu.unq.epers.model.Ubicacion
 import ar.edu.unq.epers.model.Reserva
-import ar.edu.unq.epers.model.Usuario
 
 class ModelService<T> {
 	

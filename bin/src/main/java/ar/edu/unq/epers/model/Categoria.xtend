@@ -4,7 +4,7 @@ import org.eclipse.xtend.lib.annotations.Accessors
 
 @Accessors 
 abstract class Categoria {
-	Integer categoria_id
+	Integer id
 	String nombre
 	
 	abstract def Double calcularCosto(Auto auto)

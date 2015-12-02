@@ -1,29 +1,20 @@
 package ar.edu.unq.epers.home
 
-import ar.edu.unq.epers.model.Usuario
+import ar.edu.unq.epers.servicios.Usuario
 import ar.edu.unq.epers.servicios.UsuarioNoPudoGuardarseException
-import java.util.ArrayList
+import java.sql.Connection
+import java.sql.Date
+import java.sql.DriverManager
+import java.sql.ResultSet
+import java.sql.SQLException
+import org.joda.time.DateTime
 
-class UsuarioHome extends ModelHome<Usuario>{
-	
-	new() {
-		super(Usuario)
-	}
-	
+class UsuarioHome {
 	def crear(Usuario usuarioNuevo) throws UsuarioNoPudoGuardarseException{
-		//var Date d= usuarioNuevo.fnac
-		//var Date fnacsql = new Date(d.getTime())
-	}
+		var java.util.Date d= usuarioNuevo.fnac.toDate
+		var Date fnacsql = new Date(d.getTime())
 		
-	def getAll() {
-		val query = SessionManager::getSession().createQuery("from Usuario")
-		return query.list() as ArrayList<Usuario>
-	}
-	
-		/* TP 1 (MySQL) - Guardar usuario 
-		 * 
-		 * 
-		 * var Connection conn = null 
+		var Connection conn = null 
 		try{
 				conn = this.getConnection()
 				var ps= conn.prepareStatement("INSERT INTO Usuarios (NOMBRE, APELLIDO, EMAIL, FNAC, USERNAME, VALCODE, PASSWORD) VALUES (?,?,?,?,?,?,?)")
@@ -44,9 +35,6 @@ class UsuarioHome extends ModelHome<Usuario>{
 				}
 		
 	}
-	* 
-	* TP 1 (MySQL) - Construir usuario 
-	* 
 	def construirUsuario(ResultSet rs) {
 	    var nombre =rs.getString("NOMBRE")
 	    var apellido=rs.getString("APELLIDO")
@@ -59,15 +47,12 @@ class UsuarioHome extends ModelHome<Usuario>{
 	    nwuser.nombre=nombre
 	    nwuser.apellido=apellido
 	    nwuser.email=email
-	    nwuser.fnac=fnac
+	    nwuser.fnac=new DateTime(fnac)
 	    nwuser.valcode=valcode
 	    nwuser.username= username
 	    nwuser.password=password
 	    return nwuser
 }
-* 
-* 	TP 1 (MySQL) - Traer usuario por valcode 
-* 
 	def getUsuarioPorCodigoDeValidacion(String codigoDeValidacion){
 		var Connection conn = null
 		try{
@@ -90,10 +75,9 @@ class UsuarioHome extends ModelHome<Usuario>{
 		Class.forName("com.mysql.jdbc.Driver");
 		return DriverManager.getConnection("jdbc:mysql://localhost/Rentauto?user=root&password=root");
 	}
-	TP 1 (MySQL) - Guardar usuario
-	* 
+	
 	def guardar(Usuario usuario) {
-		var java.util.Date d= usuario.fnac
+		var java.util.Date d= usuario.fnac.toDate
 		var Date fnacsql = new Date(d.getTime())
 		var Connection conn = null 
 		try{
@@ -131,5 +115,5 @@ class UsuarioHome extends ModelHome<Usuario>{
 			conn.close()
 		}
 	}
-*/
+
 }

@@ -15,7 +15,7 @@ class AutoService extends ModelService<Auto>{
 	}
 	
 	def getAutoParaReserva(Ubicacion origen,String nomCategoria,DateTime fechaInicio,DateTime fechaFin){
-		var List<Auto> autos
+		var List<Auto > autos
 		autos = new ArrayList<Auto>
 		SessionManager.runInSession([
 			
