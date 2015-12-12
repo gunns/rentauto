@@ -23,9 +23,9 @@ class BusquedaPorDia {
 	@PartitionKey()
     String location
     @PartitionKey(1)
-	DateTime finicio
+	String finicio
 	@PartitionKey(2)
-	DateTime ffin
+	String ffin
 	@FrozenValue
 	List<Patente> patentes
 }

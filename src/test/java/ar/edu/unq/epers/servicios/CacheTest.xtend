@@ -64,15 +64,15 @@ class CacheTest extends TestsSetUp {
 
 		busqueda1 = new BusquedaPorDia => [
 			location = loc.nombre
-			finicio = DateTime.now()
-			ffin = DateTime.now().plusDays(2)
+			finicio = DateTime.now().toString
+			ffin = DateTime.now().plusDays(2).toString
 			patentes = #[patente1]
 		]
 		
 		busqueda2 = new BusquedaPorDia => [
 			location = locdos.nombre
-			finicio = DateTime.now()
-			ffin = DateTime.now().plusDays(2)
+			finicio = DateTime.now().toString
+			ffin = DateTime.now().plusDays(2).toString
 			patentes = #[patente2]
 		]
 		
@@ -82,27 +82,26 @@ class CacheTest extends TestsSetUp {
 
 	@Test
 	def obtenerBusqueda() {
-		val busqueda = mapper.get(loc, DateTime.now(),DateTime.now().plusDays(2))
-		Assert.assertEquals(busqueda.location, loc)
-		Assert.assertEquals(busqueda.finicio, DateTime.now())
-		Assert.assertEquals(busqueda.finicio, DateTime.now().plusDays(2))
+		val busqueda = mapper.get(loc.nombre, DateTime.now().toString,DateTime.now().plusDays(2).toString)
+		Assert.assertEquals(busqueda.location, loc.nombre)
+		Assert.assertEquals(busqueda.finicio, DateTime.now().toString)
+		Assert.assertEquals(busqueda.finicio, DateTime.now().plusDays(2).toString)
 		Assert.assertTrue(busqueda.patentes.containsAll(#[patente1]))
 	}
 	
 	
 	@Test
 	def obtenerBusqueda2() {
-		val busqueda = mapper.get(locdos, DateTime.now(),DateTime.now().plusDays(2))
-		Assert.assertEquals(busqueda.location, locdos)
-		Assert.assertEquals(busqueda.finicio, DateTime.now())
-		Assert.assertEquals(busqueda.finicio, DateTime.now().plusDays(2))
+		val busqueda = mapper.get(locdos.nombre, DateTime.now().toString,DateTime.now().plusDays(2).toString)
+		Assert.assertEquals(busqueda.location, locdos.nombre)
+		Assert.assertEquals(busqueda.finicio, DateTime.now().toString)
+		Assert.assertEquals(busqueda.finicio, DateTime.now().plusDays(2).toString)
 		Assert.assertTrue(busqueda.patentes.containsAll(#[patente2]))
 	}
 	
-		
 	@Test
 	def busquedaVacia() {
-		val busqueda = mapper.get(loc, DateTime.now(),DateTime.now())
+		val busqueda = mapper.get(loc.nombre, DateTime.now().toString,DateTime.now().toString)
 		Assert.assertNull(busqueda)
 	}
 	
