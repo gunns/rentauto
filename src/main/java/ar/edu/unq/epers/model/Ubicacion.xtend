@@ -13,6 +13,10 @@ class Ubicacion {
 	new(String nombre){
 		this.nombre = nombre
 	}
+	
+	def getNombre(){
+		nombre
+	}
 }
 
 @Accessors 

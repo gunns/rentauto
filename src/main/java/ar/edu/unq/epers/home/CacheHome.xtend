@@ -7,16 +7,25 @@ import com.datastax.driver.mapping.annotations.Table
 import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors
 import org.joda.time.DateTime
+import com.datastax.driver.mapping.annotations.UDT
+import org.eclipse.xtend.lib.annotations.EqualsHashCode
+
+@Accessors
+@EqualsHashCode
+@UDT(keyspace = "simplex", name = "patente")
+class Patente {
+	String patente
+}
 
 @Accessors
 @Table(keyspace = "simplex", name = "busquedaPorDia")
 class BusquedaPorDia {
 	@PartitionKey()
-    Ubicacion location
+    String location
     @PartitionKey(1)
 	DateTime finicio
 	@PartitionKey(2)
 	DateTime ffin
 	@FrozenValue
-	List<String> patentes
+	List<Patente> patentes
 }

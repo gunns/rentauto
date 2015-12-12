@@ -7,8 +7,8 @@ class CacheService {
 	Cluster cluster
 	Session session
 	//def guardarAutosDisponibles
-		def connect() {
-		cluster = Cluster.builder().addContactPoint("localhost").build();
-		session = cluster.connect();
-	}
+	//	def connect() {
+	//	cluster = Cluster.builder().addContactPoint("localhost").build();
+	//	session = cluster.connect();
+	//}
 }

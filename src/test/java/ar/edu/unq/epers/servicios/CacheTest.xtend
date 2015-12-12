@@ -11,8 +11,8 @@ import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import ar.edu.unq.epers.home.BusquedaPorDia
-import ar.edu.unq.epers.model.Usuario
 import org.joda.time.DateTime
+import ar.edu.unq.epers.home.Patente
 
 class CacheTest extends TestsSetUp {
 	
@@ -21,6 +21,8 @@ class CacheTest extends TestsSetUp {
 	Mapper<BusquedaPorDia> mapper
 	BusquedaPorDia busqueda1
 	BusquedaPorDia busqueda2
+	Patente patente1
+	Patente patente2
 
 	@Before
 	def void setup() {
@@ -31,11 +33,16 @@ class CacheTest extends TestsSetUp {
 
 	def createSchema() {
 		session.execute("CREATE KEYSPACE IF NOT EXISTS  simplex WITH replication = {'class':'SimpleStrategy', 'replication_factor':3};")
+		
+		session.execute("CREATE TYPE IF NOT EXISTS simplex.patente (" +
+			"patente text);"
+		)
+		
 		session.execute("CREATE TABLE IF NOT EXISTS simplex.BusquedaPorDia (" + 
 				"location text, " + 
 				"finicio text, " +
 				"ffin text, " +
-				"patentes list< frozen<text>>," + 
+				"patentes list<frozen< patente>>," + 
 				"PRIMARY KEY (location, finicio, ffin));"
 		)
 		mapper = new MappingManager(session).mapper(BusquedaPorDia);
@@ -47,19 +54,26 @@ class CacheTest extends TestsSetUp {
 	}
 
 	def crearBusqueda() {
+		patente1 = new Patente => [
+			patente = auto.getPatente
+		]
+
+		patente2 = new Patente => [
+			patente = autodos.getPatente
+		]
 
 		busqueda1 = new BusquedaPorDia => [
-			location = loc
+			location = loc.nombre
 			finicio = DateTime.now()
 			ffin = DateTime.now().plusDays(2)
-			patentes = #["tsm201"]
+			patentes = #[patente1]
 		]
 		
 		busqueda2 = new BusquedaPorDia => [
-			location = locdos
+			location = locdos.nombre
 			finicio = DateTime.now()
 			ffin = DateTime.now().plusDays(2)
-			patentes = #["skt015"]
+			patentes = #[patente2]
 		]
 		
 		mapper.save(busqueda1)
@@ -72,7 +86,7 @@ class CacheTest extends TestsSetUp {
 		Assert.assertEquals(busqueda.location, loc)
 		Assert.assertEquals(busqueda.finicio, DateTime.now())
 		Assert.assertEquals(busqueda.finicio, DateTime.now().plusDays(2))
-		Assert.assertTrue(busqueda.patentes.containsAll(#["tsm201"]))
+		Assert.assertTrue(busqueda.patentes.containsAll(#[patente1]))
 	}
 	
 	
@@ -82,7 +96,7 @@ class CacheTest extends TestsSetUp {
 		Assert.assertEquals(busqueda.location, locdos)
 		Assert.assertEquals(busqueda.finicio, DateTime.now())
 		Assert.assertEquals(busqueda.finicio, DateTime.now().plusDays(2))
-		Assert.assertTrue(busqueda.patentes.containsAll(#["skt015"]))
+		Assert.assertTrue(busqueda.patentes.containsAll(#[patente2]))
 	}
 	
 		

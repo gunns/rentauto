@@ -32,6 +32,10 @@ class Auto {
 		this.ubicacionInicial = ubicacionInicial
 	}
 
+	def getPatente(){
+		patente
+	}
+
 	def getUbicacion(){
 		this.ubicacionParaDia(new Date());
 	}
