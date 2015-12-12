@@ -17,6 +17,10 @@ class Usuario implements IUsuario{
 	String password
 	List<Reserva> reservas = newArrayList
 	
+	def getUsername(){
+		username
+	}
+	
 	def validate(){
 		valcode = username+"validado"
 	}

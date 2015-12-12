@@ -1,6 +1,4 @@
 
-# Grupo 4
-falta antes crear un service de reservas y otro de autos al igual que homes.
 
 # Rentauto.com
 La idea de este TP es implementar el sistema Backend de la empresa *Rentauto.com* que se dedica al alquiler de autos.
@@ -119,7 +117,7 @@ Fecha de Entrega: 14/12
 #### Requerimientos:
 * Como administrador quiero que la información de disponibilidad de los autos se guarde de forma 
 cacheada por día y ubicación, o sea para cada día que autos estan disponibles. De esta manera es 
-mucho más rápido la consultade los autos disponibles ese día
+mucho más rápido la consulta de los autos disponibles ese día
 * Como administrador quiero que la información de disponibilidad de los autos se actualice en 
 el caché cuando ocurra un cambio.
 
