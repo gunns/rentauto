@@ -1,10 +1,12 @@
 package ar.edu.unq.epers.servicios
 
 import ar.edu.unq.epers.home.BusquedaPorDia
+import ar.edu.unq.epers.home.Patente
 import com.datastax.driver.core.Cluster
 import com.datastax.driver.core.Session
 import com.datastax.driver.mapping.Mapper
 import com.datastax.driver.mapping.MappingManager
+import java.util.List
 
 class CacheService {
 	Cluster cluster
@@ -36,6 +38,16 @@ class CacheService {
 	def eliminarTablas() {
 		session.execute("DROP KEYSPACE IF EXISTS simplex");
 		cluster.close();
+	}
+	
+	def crearBusqueda(String loc,String fechaInicio,String fechaFin,Patente patente) {
+		var bpd = new BusquedaPorDia => [
+			location = loc
+			finicio = fechaInicio
+			ffin = fechaFin
+			patentes = #[patente]
+			]
+			this.mapper.save(bpd)
 	}
 	//def guardarAutosDisponibles
 	//	def connect() {

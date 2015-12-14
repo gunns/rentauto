@@ -1,18 +1,12 @@
 package ar.edu.unq.epers.servicios
 
-import ar.edu.unq.epers.servicios.TestsSetUp
-
-import com.datastax.driver.core.Cluster
-import com.datastax.driver.core.Session
-import com.datastax.driver.mapping.Mapper
-import com.datastax.driver.mapping.MappingManager
+import ar.edu.unq.epers.home.BusquedaPorDia
+import ar.edu.unq.epers.home.Patente
+import org.joda.time.DateTime
 import org.junit.After
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
-import ar.edu.unq.epers.home.BusquedaPorDia
-import org.joda.time.DateTime
-import ar.edu.unq.epers.home.Patente
 
 class CacheTest extends TestsSetUp {
 	
@@ -26,9 +20,17 @@ class CacheTest extends TestsSetUp {
 	
 	@Before
 	def void setup() {
+		patente1 = new Patente => [
+			patente = auto.getPatente
+		]
+
+		patente2 = new Patente => [
+			patente = autodos.getPatente
+		]
 		this.service.connect
 		this.service.createSchema
-		crearBusqueda
+		this.service.crearBusqueda(loc.nombre,fechaInicio,fechaFin,patente1)
+		this.service.crearBusqueda(locdos.nombre,fechaInicio,fechaFin,patente2)
 	}
 
 	/*def createSchema() {
@@ -53,7 +55,7 @@ class CacheTest extends TestsSetUp {
 		session = cluster.connect();
 	}*/
 
-	def crearBusqueda() {
+	/*def crearBusqueda() {
 		
 		
 		
@@ -81,7 +83,7 @@ class CacheTest extends TestsSetUp {
 		
 		this.service.mapper.save(busqueda1)
 		this.service.mapper.save(busqueda2)
-	}
+	}*/
 
 	@Test
 	def obtenerBusqueda() {
