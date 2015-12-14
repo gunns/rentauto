@@ -80,7 +80,7 @@ class RedSocialHome {
 			msg,TipoDeRelaciones.To,Direction.OUTGOING
 		)
 		//busco el destinatario de un mensaje. 
-		//como va a ser a quien va dirigido
+		//como va a ser a quien va dirigido,
 		//la direction va a ser outgoing
 		to.map[toUser].head
 	}

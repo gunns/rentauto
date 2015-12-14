@@ -23,7 +23,10 @@ class CacheTest extends TestsSetUp {
 	BusquedaPorDia busqueda2
 	Patente patente1
 	Patente patente2
-
+	
+	val fechaInicio = DateTime.now().toString
+	val fechaFin = DateTime.now().plusDays(3).toString
+	
 	@Before
 	def void setup() {
 		connect
@@ -54,6 +57,9 @@ class CacheTest extends TestsSetUp {
 	}
 
 	def crearBusqueda() {
+		
+		
+		
 		patente1 = new Patente => [
 			patente = auto.getPatente
 		]
@@ -64,15 +70,15 @@ class CacheTest extends TestsSetUp {
 
 		busqueda1 = new BusquedaPorDia => [
 			location = loc.nombre
-			finicio = DateTime.now().toString
-			ffin = DateTime.now().plusDays(2).toString
+			finicio = fechaInicio
+			ffin = fechaFin
 			patentes = #[patente1]
 		]
 		
 		busqueda2 = new BusquedaPorDia => [
 			location = locdos.nombre
-			finicio = DateTime.now().toString
-			ffin = DateTime.now().plusDays(2).toString
+			finicio = fechaInicio
+			ffin = fechaFin
 			patentes = #[patente2]
 		]
 		
@@ -82,26 +88,26 @@ class CacheTest extends TestsSetUp {
 
 	@Test
 	def obtenerBusqueda() {
-		val busqueda = mapper.get(loc.nombre, DateTime.now().toString,DateTime.now().plusDays(2).toString)
+		val busqueda = mapper.get(loc.nombre, fechaInicio,fechaFin)
 		Assert.assertEquals(busqueda.location, loc.nombre)
-		Assert.assertEquals(busqueda.finicio, DateTime.now().toString)
-		Assert.assertEquals(busqueda.finicio, DateTime.now().plusDays(2).toString)
+		Assert.assertEquals(busqueda.finicio, fechaInicio)
+		Assert.assertEquals(busqueda.ffin, fechaFin)
 		Assert.assertTrue(busqueda.patentes.containsAll(#[patente1]))
 	}
 	
 	
 	@Test
 	def obtenerBusqueda2() {
-		val busqueda = mapper.get(locdos.nombre, DateTime.now().toString,DateTime.now().plusDays(2).toString)
+		val busqueda = mapper.get(locdos.nombre, fechaInicio,fechaFin)
 		Assert.assertEquals(busqueda.location, locdos.nombre)
-		Assert.assertEquals(busqueda.finicio, DateTime.now().toString)
-		Assert.assertEquals(busqueda.finicio, DateTime.now().plusDays(2).toString)
+		Assert.assertEquals(busqueda.finicio, fechaInicio)
+		Assert.assertEquals(busqueda.ffin, fechaFin)
 		Assert.assertTrue(busqueda.patentes.containsAll(#[patente2]))
 	}
 	
 	@Test
 	def busquedaVacia() {
-		val busqueda = mapper.get(loc.nombre, DateTime.now().toString,DateTime.now().toString)
+		val busqueda = mapper.get(loc.nombre, fechaInicio,fechaInicio)
 		Assert.assertNull(busqueda)
 	}
 	
