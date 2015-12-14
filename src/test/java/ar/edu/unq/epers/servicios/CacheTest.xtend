@@ -16,25 +16,22 @@ import ar.edu.unq.epers.home.Patente
 
 class CacheTest extends TestsSetUp {
 	
-	Cluster cluster
-	Session session
-	Mapper<BusquedaPorDia> mapper
 	BusquedaPorDia busqueda1
 	BusquedaPorDia busqueda2
 	Patente patente1
 	Patente patente2
-	
+	CacheService service = new CacheService()
 	val fechaInicio = DateTime.now().toString
 	val fechaFin = DateTime.now().plusDays(3).toString
 	
 	@Before
 	def void setup() {
-		connect
-		createSchema
+		this.service.connect
+		this.service.createSchema
 		crearBusqueda
 	}
 
-	def createSchema() {
+	/*def createSchema() {
 		session.execute("CREATE KEYSPACE IF NOT EXISTS  simplex WITH replication = {'class':'SimpleStrategy', 'replication_factor':3};")
 		
 		session.execute("CREATE TYPE IF NOT EXISTS simplex.patente (" +
@@ -49,12 +46,12 @@ class CacheTest extends TestsSetUp {
 				"PRIMARY KEY (location, finicio, ffin));"
 		)
 		mapper = new MappingManager(session).mapper(BusquedaPorDia);
-	}
+	}*/
 
-	def connect() {
+	/*def connect() {
 		cluster = Cluster.builder().addContactPoint("localhost").build();
 		session = cluster.connect();
-	}
+	}*/
 
 	def crearBusqueda() {
 		
@@ -82,13 +79,13 @@ class CacheTest extends TestsSetUp {
 			patentes = #[patente2]
 		]
 		
-		mapper.save(busqueda1)
-		mapper.save(busqueda2)
+		this.service.mapper.save(busqueda1)
+		this.service.mapper.save(busqueda2)
 	}
 
 	@Test
 	def obtenerBusqueda() {
-		val busqueda = mapper.get(loc.nombre, fechaInicio,fechaFin)
+		val busqueda = this.service.mapper.get(loc.nombre, fechaInicio,fechaFin)
 		Assert.assertEquals(busqueda.location, loc.nombre)
 		Assert.assertEquals(busqueda.finicio, fechaInicio)
 		Assert.assertEquals(busqueda.ffin, fechaFin)
@@ -98,7 +95,7 @@ class CacheTest extends TestsSetUp {
 	
 	@Test
 	def obtenerBusqueda2() {
-		val busqueda = mapper.get(locdos.nombre, fechaInicio,fechaFin)
+		val busqueda = this.service.mapper.get(locdos.nombre, fechaInicio,fechaFin)
 		Assert.assertEquals(busqueda.location, locdos.nombre)
 		Assert.assertEquals(busqueda.finicio, fechaInicio)
 		Assert.assertEquals(busqueda.ffin, fechaFin)
@@ -107,14 +104,13 @@ class CacheTest extends TestsSetUp {
 	
 	@Test
 	def busquedaVacia() {
-		val busqueda = mapper.get(loc.nombre, fechaInicio,fechaInicio)
+		val busqueda = this.service.mapper.get(loc.nombre, fechaInicio,fechaInicio)
 		Assert.assertNull(busqueda)
 	}
 	
 
 	@After
-	def eliminarTablas() {
-		session.execute("DROP KEYSPACE IF EXISTS simplex");
-		cluster.close();
+	def after() {
+		this.service.eliminarTablas
 	}
 }
