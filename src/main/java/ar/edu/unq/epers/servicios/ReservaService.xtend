@@ -15,7 +15,7 @@ class ReservaService extends ModelService<Reserva>{
 	}
 	
 	def crearReserva(Integer numSol,Auto auto,Ubicacion origen,String categoria,Ubicacion destino, DateTime inicio, DateTime fin,Usuario user){
-	
+		new CacheService().eliminarTablas
 		SessionManager.runInSession[
 		var res = new Reserva
 			res.numeroSolicitud = numSol//new ReservaHome().getAll().last.numeroSolicitud+1

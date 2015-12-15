@@ -1,5 +1,6 @@
 package ar.edu.unq.epers.model
 
+import ar.edu.unq.epers.servicios.CacheService
 import java.util.Date
 import java.util.List
 import org.eclipse.xtend.lib.annotations.Accessors

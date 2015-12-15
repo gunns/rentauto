@@ -22,7 +22,12 @@ class AutoTest extends TestsSetUp {
 	
 	@Test
 	def void testGetLosQueCumplenEstricto(){
+		
 		var autoServ = new AutoService()
+		
+		autoServ.cs.connect
+		
+		
 		var List<Auto> deportivosQueCumplen = new ArrayList<Auto>()
 		deportivosQueCumplen = autoServ.getAutoParaReserva(loc,"Deportivo",DateTime.now(),DateTime.now().plusDays(2))
 		//pido los que cumplen con las especificaciones (solo el dos porque el uno tiene una reserva hasta hoy)

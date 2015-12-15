@@ -9,9 +9,13 @@ import com.datastax.driver.mapping.MappingManager
 import java.util.List
 
 class CacheService {
-	Cluster cluster
-	Session session
+	Cluster cluster;
+	Session session;
 	public Mapper<BusquedaPorDia> mapper
+	
+	new() {
+		connect
+	}
 	
 	def createSchema() {
 		session.execute("CREATE KEYSPACE IF NOT EXISTS  simplex WITH replication = {'class':'SimpleStrategy', 'replication_factor':3};")
@@ -27,12 +31,13 @@ class CacheService {
 				"patentes list<frozen< patente>>," + 
 				"PRIMARY KEY (location, finicio, ffin));"
 		)
-		mapper = new MappingManager(session).mapper(BusquedaPorDia);
 	}
 	
 	def connect() {
 		cluster = Cluster.builder().addContactPoint("localhost").build();
 		session = cluster.connect();
+		this.createSchema
+		mapper= new MappingManager(session).mapper(BusquedaPorDia);
 	}
 		
 	def eliminarTablas() {
@@ -40,12 +45,12 @@ class CacheService {
 		cluster.close();
 	}
 	
-	def crearBusqueda(String loc,String fechaInicio,String fechaFin,Patente patente) {
+	def crearBusqueda(String loc,String fechaInicio,String fechaFin,List<Patente> pat) {
 		var bpd = new BusquedaPorDia => [
 			location = loc
 			finicio = fechaInicio
 			ffin = fechaFin
-			patentes = #[patente]
+			patentes = pat
 			]
 			this.mapper.save(bpd)
 	}

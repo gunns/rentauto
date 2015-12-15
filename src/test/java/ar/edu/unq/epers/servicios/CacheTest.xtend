@@ -20,7 +20,7 @@ class CacheTest extends TestsSetUp {
 	
 	@Before
 	def void setup() {
-		patente1 = new Patente => [
+		/*patente1 = new Patente => [
 			patente = auto.getPatente
 		]
 
@@ -32,7 +32,7 @@ class CacheTest extends TestsSetUp {
 		this.service.crearBusqueda(loc.nombre,fechaInicio,fechaFin,patente1)
 		this.service.crearBusqueda(locdos.nombre,fechaInicio,fechaFin,patente2)
 	}
-
+*/
 	/*def createSchema() {
 		session.execute("CREATE KEYSPACE IF NOT EXISTS  simplex WITH replication = {'class':'SimpleStrategy', 'replication_factor':3};")
 		
@@ -85,7 +85,7 @@ class CacheTest extends TestsSetUp {
 		this.service.mapper.save(busqueda2)
 	}*/
 
-	@Test
+	/* @Test
 	def obtenerBusqueda() {
 		val busqueda = this.service.mapper.get(loc.nombre, fechaInicio,fechaFin)
 		Assert.assertEquals(busqueda.location, loc.nombre)
@@ -114,5 +114,5 @@ class CacheTest extends TestsSetUp {
 	@After
 	def after() {
 		this.service.eliminarTablas
-	}
+	}*/}
 }

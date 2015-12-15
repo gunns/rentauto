@@ -1,9 +1,10 @@
 package ar.edu.unq.epers.home
 
 import ar.edu.unq.epers.model.Auto
-import java.util.ArrayList
-import org.joda.time.DateTime
 import ar.edu.unq.epers.model.Ubicacion
+import java.util.ArrayList
+import java.util.List
+import org.joda.time.DateTime
 
 class AutoHome extends ModelHome<Auto> {
 	
@@ -36,6 +37,16 @@ class AutoHome extends ModelHome<Auto> {
 				//le digo a la query que "value" es el nombe de la categoria parámetro
 				
       return query.list() as ArrayList<Auto>
+	}
+	
+	def getAutoPorPatente(List<String> patentes){
+		val query = SessionManager::getSession().createQuery("
+				select auto
+				from Auto as auto
+				where auto.patente in :patentes")
+				query.setParameter("patentes", patentes)
+				
+		return query.list() as ArrayList<Auto>
 	}
 	
 }

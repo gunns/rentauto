@@ -15,6 +15,15 @@ import org.eclipse.xtend.lib.annotations.EqualsHashCode
 @UDT(keyspace = "simplex", name = "patente")
 class Patente {
 	String patente
+	
+	new(String string) {
+		patente = string
+	}
+	
+	new() {
+		
+	}
+	
 }
 
 @Accessors
